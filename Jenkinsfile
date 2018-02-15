@@ -26,11 +26,10 @@ node {
 
         stage('Deploy parent pom') {
 
-            pom = readMavenPom file: 'pom.xml'
-            groupId = pom.groupId
-            artifactId = pom.artifactId
-
-            def gcsFolder = createGoogleStorageDirectory(groupId,artifactId)
+//            pom = readMavenPom file: 'pom.xml'
+//            groupId = pom.groupId
+//            artifactId = pom.artifactId
+//            def gcsFolder = createGoogleStorageDirectory(groupId,artifactId)
 
             sh "gsutil help"
         }
