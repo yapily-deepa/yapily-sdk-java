@@ -4,6 +4,11 @@ node {
 
     slackSend "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} - ${BRANCH_NAME} - (<${env.BUILD_URL}|Open>)"
 
+    stage('Checkout') {
+        checkout scm
+    }
+
+
     withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
 
         stage('Build') {
