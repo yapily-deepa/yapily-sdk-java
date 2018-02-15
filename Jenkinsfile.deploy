@@ -2,12 +2,8 @@ node {
 
     slackSend "Deployment Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} - (<${env.BUILD_URL}|Open>)"
 
-    stage('Clone sources') {
-        git(
-           url: 'git@bitbucket.org:acaciaconnect/yapily-sdk.git',
-           credentialsId: 'git',
-           branch: 'master'
-        )
+    stage('Checkout') {
+        checkout scm
     }
 
     withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
