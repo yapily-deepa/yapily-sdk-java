@@ -5,7 +5,7 @@
     <parent>
         <artifactId>yapily-sdk</artifactId>
         <groupId>com.yapily</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,12 +23,12 @@
         <dependency>
             <groupId>com.yapily</groupId>
             <artifactId>api-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>com.yapily</groupId>
             <artifactId>auth-client</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1</version>
         </dependency>
 
         <dependency>
