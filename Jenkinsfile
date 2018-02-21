@@ -20,13 +20,8 @@ node {
 
         if(BRANCH_NAME == "master" || BRANCH_NAME =~ "release/") {
 
-            stage('Deploy parent pom') {
-                def gcsFolder = createGoogleStorageDirectory()
-                uploadPom(gcsFolder)
-            }
-
             stage('Deploy sdk') {
-                dir('auth-client') {
+                dir('sdk') {
                     def gcsFolder = createModuleGoogleStorageDirectory()
                     uploadPomAndArtifact(gcsFolder)
                 }
