@@ -8,7 +8,7 @@ import java.io.Reader;
 import org.apache.http.HttpStatus;
 import org.apache.http.entity.ContentType;
 
-import com.acaciaconnect.sdk.services.ApiException;
+import com.acaciaconnect.sdk.client.exceptions.ApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.CharStreams;

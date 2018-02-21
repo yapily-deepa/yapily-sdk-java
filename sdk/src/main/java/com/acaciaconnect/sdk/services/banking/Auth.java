@@ -9,7 +9,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.acaciaconnect.auth.client.AcaciaAuth;
-import com.acaciaconnect.sdk.services.ApiException;
+import com.acaciaconnect.sdk.client.exceptions.ApiException;
 import com.acaciaconnect.sdk.services.AuthClient;
 
 public class Auth extends AuthClient {

@@ -24,32 +24,27 @@ public class HttpUsersRpc extends BaseHttpRpc {
         this.apiClient = apiClient;
     }
 
-    public List<ApplicationUser> listUsers(UUID applicationUuid) {
-        return requestGet(getApplicationUrl(applicationUuid), responseDeserializerList, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public List<ApplicationUser> listUsers() {
+        return requestGet(apiClient.getBaseUrl(), responseDeserializerList, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
     public ApplicationUser postUser(String appUserId) {
         return requestPost(apiClient.getBaseUrl(), appUserId, requestSerializer, responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public void putUser(UUID applicationUuid, UUID uuid, ApplicationUser applicationUser) {
-        requestPut(getApplicationUserUrl(applicationUuid, uuid), applicationUser, requestSerializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public void putUser(UUID uuid, ApplicationUser applicationUser) {
+        requestPut(getApplicationUserUrl(uuid), applicationUser, requestSerializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public void deleteUser(UUID applicationUuid, UUID uuid) {
-        requestDelete(getApplicationUserUrl(applicationUuid, uuid), SystemPropertiesCredentialsProvider.credentialsProvider());
+    public void deleteUser(UUID uuid) {
+        requestDelete(getApplicationUserUrl(uuid), SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public ApplicationUser getUser(UUID applicationUuid, UUID uuid) {
-        return requestGet(getApplicationUserUrl(applicationUuid, uuid), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public ApplicationUser getUser(UUID uuid) {
+        return requestGet(getApplicationUserUrl(uuid), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    private String getApplicationUrl(UUID applicationUuid) {
-        return apiClient.getBaseUrl()
-                        .replace("{applicationUuid}", applicationUuid.toString());
-    }
-
-    private String getApplicationUserUrl(UUID applicationUuid, UUID userUuid) {
-        return getApplicationUrl(applicationUuid) + "/" + userUuid.toString();
+    private String getApplicationUserUrl(UUID userUuid) {
+        return apiClient.getBaseUrl() + userUuid.toString();
     }
 }

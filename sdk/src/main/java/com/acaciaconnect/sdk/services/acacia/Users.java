@@ -21,7 +21,7 @@ public class Users extends ApiClient {
     }
 
     public List<ApplicationUser> listUsers(UUID applicationUuid) {
-        return rpc.listUsers(applicationUuid);
+        return rpc.listUsers();
     }
 
     public ApplicationUser createUser(String appUserId) {
@@ -29,7 +29,7 @@ public class Users extends ApiClient {
     }
 
     public void updateUser(UUID applicationUuid, ApplicationUser applicationUser) {
-        rpc.putUser(applicationUuid, applicationUser.getUuid(), applicationUser);
+        rpc.putUser(applicationUser.getUuid(), applicationUser);
     }
 
 }
