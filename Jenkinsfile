@@ -29,14 +29,14 @@ node {
 
             stage('Deploy sdk') {
                 dir('sdk') {
-                    def gcsFolder = createModuleGoogleStorageDirectory()
+                    def gcsFolder = createGoogleStorageDirectory()
                     uploadPomAndArtifact(gcsFolder)
                 }
             }
 
             stage('Deploy example') {
                 dir('example') {
-                    def gcsFolder = createModuleGoogleStorageDirectory()
+                    def gcsFolder = createGoogleStorageDirectory()
                     uploadPomAndArtifact(gcsFolder)
                 }
             }
