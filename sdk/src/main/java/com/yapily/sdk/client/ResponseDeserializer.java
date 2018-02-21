@@ -8,51 +8,51 @@ import java.io.Reader;
 import org.apache.http.HttpStatus;
 import org.apache.http.entity.ContentType;
 
-import com.yapily.sdk.services.ApiException;
+import com.yapily.sdk.client.exceptions.ApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.CharStreams;
 
 public class ResponseDeserializer<T> {
 
-  private final Class<T> clazz;
-  private final TypeReference<T> typeReference;
+    private final Class<T> clazz;
+    private final TypeReference<T> typeReference;
 
-  public ResponseDeserializer(TypeReference<T> typeReference) {
-    this.typeReference = typeReference;
-    this.clazz = null;
-  }
-
-  public ResponseDeserializer(Class<T> clazz) {
-    this.clazz = clazz;
-    this.typeReference = null;
-  }
-
-  public T getObject(InputStream content) throws IOException {
-    final ObjectMapper objectMapper = new ObjectMapper();
-    T result = null;
-    final String text = getContent(content);
-    try {
-      if (clazz != null) {
-        result = objectMapper.readValue(text, clazz);
-      } else {
-        result = objectMapper.readValue(text, typeReference);
-      }
-    } catch (final IOException e) {
-      throw new ApiException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Error deserializing: " + text, e);
+    public ResponseDeserializer(TypeReference<T> typeReference) {
+        this.typeReference = typeReference;
+        this.clazz = null;
     }
-    return result;
-  }
 
-  private String getContent(InputStream inputStream) throws IOException {
-    String text = null;
-    try (final Reader reader = new InputStreamReader(inputStream)) {
-      text = CharStreams.toString(reader);
+    public ResponseDeserializer(Class<T> clazz) {
+        this.clazz = clazz;
+        this.typeReference = null;
     }
-    return text;
-  }
 
-  public String getMimeType() {
-    return ContentType.APPLICATION_JSON.getMimeType();
-  }
+    public T getObject(InputStream content) throws IOException {
+        final ObjectMapper objectMapper = new ObjectMapper();
+        T result = null;
+        final String text = getContent(content);
+        try {
+            if (clazz != null) {
+                result = objectMapper.readValue(text, clazz);
+            } else {
+                result = objectMapper.readValue(text, typeReference);
+            }
+        } catch (final IOException e) {
+            throw new ApiException(HttpStatus.SC_INTERNAL_SERVER_ERROR, "Error deserializing: " + text, e);
+        }
+        return result;
+    }
+
+    private String getContent(InputStream inputStream) throws IOException {
+        String text = null;
+        try (final Reader reader = new InputStreamReader(inputStream)) {
+            text = CharStreams.toString(reader);
+        }
+        return text;
+    }
+
+    public String getMimeType() {
+        return ContentType.APPLICATION_JSON.getMimeType();
+    }
 }

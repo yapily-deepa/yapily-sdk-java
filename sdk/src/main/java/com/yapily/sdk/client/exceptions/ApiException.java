@@ -1,15 +1,13 @@
-package com.yapily.sdk.services;
-
-import com.yapily.sdk.client.exceptions.BaseServiceException;
+package com.yapily.sdk.client.exceptions;
 
 public class ApiException extends BaseServiceException {
     private static final long serialVersionUID = 1L;
 
     public ApiException(int code, String message) {
-        super(BaseServiceException.ExceptionData.newBuilder()
-                                                .setCode(code)
-                                                .setMessage(message)
-                                                .build());
+        super(ExceptionData.newBuilder()
+                           .setCode(code)
+                           .setMessage(message)
+                           .build());
     }
 
     public ApiException(int code, String message, Throwable cause) {
