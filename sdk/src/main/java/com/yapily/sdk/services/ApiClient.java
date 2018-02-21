@@ -23,7 +23,9 @@ public class ApiClient {
      * The default encoded root URL of the service. This is determined when the library is generated and
      * normally should not be changed.
      */
-    static final String DEFAULT_ROOT_URL = System.getenv().getOrDefault("ACACIA_API_URL", "http://localhost:8081");
+    static final String DEFAULT_ROOT_URL =
+            System.getenv().getOrDefault(AcaciaApi.DEFAULT_ROOT_URL_ENV_NAME,
+                                         System.getProperty(AcaciaApi.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8081"));
 
     /**
      * Root URL of the service, for example {@code "https://api.acaciaconnect.com/"}. Must be

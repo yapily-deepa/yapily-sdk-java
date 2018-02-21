@@ -23,7 +23,9 @@ public class AuthClient {
      * The default encoded root URL of the service. This is determined when the library is generated and
      * normally should not be changed.
      */
-    static final String DEFAULT_ROOT_URL = System.getenv().getOrDefault("ACACIA_AUTH_URL", "http://localhost:8082/");
+    static final String DEFAULT_ROOT_URL =
+            System.getenv().getOrDefault(AcaciaAuth.DEFAULT_ROOT_URL_ENV_NAME,
+                                         System.getProperty(AcaciaAuth.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8082/"));
 
     private final String rootUrl;
 
