@@ -11,25 +11,32 @@ node {
     withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
 
         stage('Test') {
-            sh "mvn clean package install"
+            dir('sdk') {
+                sh "mvn test"
+            }
         }
 
         stage('Build') {
-            sh "mvn clean package install -Dmaven.test.skip=true"
+            dir('sdk') {
+                sh "mvn clean package install -Dmaven.test.skip=true"
+            }
+            dir('example') {
+                sh "mvn clean package install -Dmaven.test.skip=true"
+            }
         }
 
         if(BRANCH_NAME == "master" || BRANCH_NAME =~ "release/") {
 
             stage('Deploy sdk') {
                 dir('sdk') {
-                    def gcsFolder = createModuleGoogleStorageDirectory()
+                    def gcsFolder = createGoogleStorageDirectory()
                     uploadPomAndArtifact(gcsFolder)
                 }
             }
 
             stage('Deploy example') {
                 dir('example') {
-                    def gcsFolder = createModuleGoogleStorageDirectory()
+                    def gcsFolder = createGoogleStorageDirectory()
                     uploadPomAndArtifact(gcsFolder)
                 }
             }

@@ -1,5 +1,6 @@
 package com.yapily.sdk.client.acacia;
 
+
 import com.yapily.api.client.models.acacia.ApplicationUser;
 import com.yapily.sdk.client.BaseHttpRpc;
 import com.yapily.sdk.client.RequestSerializer;
