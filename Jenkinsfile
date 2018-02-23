@@ -1,4 +1,8 @@
+@Library('helper-library') _
+
 node {
+
+    def helper = new com.yapily.jenkins.Helper()
 
     properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactNumToKeepStr: '5', numToKeepStr: '5']]])
 
@@ -29,58 +33,19 @@ node {
 
             stage('Deploy sdk') {
                 dir('sdk') {
-                    def gcsFolder = createGoogleStorageDirectory()
-                    uploadPomAndArtifact(gcsFolder)
+                    def gcsFolder = helper.createGoogleStorageDirectory()
+                    helper.uploadPomAndArtifact(gcsFolder)
                 }
             }
 
             stage('Deploy example') {
                 dir('example') {
-                    def gcsFolder = createGoogleStorageDirectory()
-                    uploadPomAndArtifact(gcsFolder)
+                    def gcsFolder = helper.createGoogleStorageDirectory()
+                    helper.uploadPomAndArtifact(gcsFolder)
                 }
             }
 
         }
 
     }
-}
-
-def createGoogleStorageDirectory() {
-
-    pom = readMavenPom file: 'pom.xml'
-    groupId = pom.groupId
-    artifactId = pom.artifactId
-    version = pom.version
-
-    def gcsFolder = groupId.replace(".","/")+"/"+artifactId+"/"+version
-    gcsFolder
-}
-
-
-def createModuleGoogleStorageDirectory() {
-
-    pom = readMavenPom file: 'pom.xml'
-    groupId = pom.parent.groupId
-    artifactId = pom.artifactId
-    version = pom.parent.version
-    def gcsFolder = groupId.replace(".","/")+"/"+artifactId+"/"+version
-    gcsFolder
-}
-
-def uploadPom(gcsFolder) {
-
-    sh 'gsutil cp pom.xml gs://maven.yapily.com/'+gcsFolder+'/pom.xml'
-}
-
-def uploadPomAndArtifact(gcsFolder) {
-
-    uploadPom(gcsFolder)
-    def jarFile = getJarFromTarget()
-    sh 'gsutil cp target/'+jarFile+' gs://maven.yapily.com/'+gcsFolder+'/'+jarFile
-}
-
-def getJarFromTarget() {
-
-    findFiles(glob: 'target/*.jar')[0].name
 }
