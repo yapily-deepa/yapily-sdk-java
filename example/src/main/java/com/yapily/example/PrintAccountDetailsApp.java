@@ -25,7 +25,7 @@ import java.util.UUID;
  * Application credentials must be created and managed in the Acacia Dashboard Application.
  * For demo purposes, the application ID and secret are included as constants.
  */
-public class App3 {
+public class PrintAccountDetailsApp {
     public static void main(String[] args) {
         System.out.println("Hello Acacia API!");
 

@@ -11,7 +11,7 @@ import com.yapily.sdk.services.acacia.Banks;
  * Acacia SDK
  *
  */
-public class App {
+public class GetBanksApp {
 
   public static void main(String[] args) {
 

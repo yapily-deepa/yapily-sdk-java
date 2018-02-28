@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Application credentials must be created and managed in the Acacia Dashboard Application.
  * For demo purposes, the application ID and secret are included as constants.
  */
-public class App2 {
+public class ConfigureUsersApp {
 
   public static void main(String[] args) {
 
