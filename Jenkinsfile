@@ -15,34 +15,22 @@ node {
     withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
 
         stage('Test') {
-            dir('sdk') {
-                sh "mvn test"
-            }
+            helper.mavenTest('sdk')
         }
 
         stage('Build') {
-            dir('sdk') {
-                sh "mvn clean package install -Dmaven.test.skip=true"
-            }
-            dir('example') {
-                sh "mvn clean package install -Dmaven.test.skip=true"
-            }
+            helper.mavenBuild('sdk')
+            helper.mavenBuild('example')
         }
 
         if(BRANCH_NAME == "master" || BRANCH_NAME =~ "release/") {
 
             stage('Deploy sdk') {
-                dir('sdk') {
-                    def gcsFolder = helper.createGoogleStorageDirectory()
-                    helper.uploadPomAndArtifact(gcsFolder)
-                }
+                helper.mavenDeploy('sdk')
             }
 
             stage('Deploy example') {
-                dir('example') {
-                    def gcsFolder = helper.createGoogleStorageDirectory()
-                    helper.uploadPomAndArtifact(gcsFolder)
-                }
+                helper.mavenDeploy('example')
             }
 
         }
