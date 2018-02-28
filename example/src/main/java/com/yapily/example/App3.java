@@ -1,10 +1,10 @@
 package com.yapily.example;
 
-import com.yapily.api.client.AcaciaApi;
-import com.yapily.api.client.models.acacia.ApplicationUser;
-import com.yapily.api.client.models.banking.Account;
-import com.yapily.api.client.models.banking.Identity;
-import com.yapily.api.client.models.banking.Transaction;
+import com.yapily.sdk.AcaciaApi;
+import com.yapily.api.client.model.ApplicationUser;
+import com.yapily.api.client.model.Account;
+import com.yapily.api.client.model.Identity;
+import com.yapily.api.client.model.Transaction;
 import com.yapily.sdk.services.acacia.Banks;
 import com.yapily.sdk.services.acacia.Users;
 import com.yapily.sdk.services.banking.Accounts;
@@ -45,7 +45,7 @@ public class App3 {
         // Set user and bank id variables
         // banks.listBanks().stream().filter(bank -> bank.getId().equals("bbva")).findFirst().get().getId();
         String bankId = "bbva";
-        UUID userUUID = applicationUser.getUuid();
+        String userUUID = applicationUser.getUuid();
 
         // Send applicationUser to authentication for a bank and add a callback with credentials
         final Auth auth = new Auth();

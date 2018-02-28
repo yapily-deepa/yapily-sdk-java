@@ -1,6 +1,6 @@
 package com.yapily.sdk.client.banking;
 
-import com.yapily.api.client.models.banking.Transaction;
+import com.yapily.api.client.model.Transaction;
 import com.yapily.sdk.client.BaseHttpRpc;
 import com.yapily.sdk.client.ResponseDeserializer;
 import com.yapily.sdk.client.SystemPropertiesCredentialsProvider;
@@ -21,15 +21,15 @@ public class HttpTransactionsRpc extends BaseHttpRpc {
         this.apiClient = apiClient;
     }
 
-    public List<Transaction> getTransactions(UUID userUUID, String accountId, String bankId) {
+    public List<Transaction> getTransactions(String userUUID, String accountId, String bankId) {
         return requestGet(getTransactionsUrl(userUUID, accountId, bankId),
                           responseDeserializerList,
                           SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    private String getTransactionsUrl(UUID userUUID, String accountId, String bankId) {
+    private String getTransactionsUrl(String userUUID, String accountId, String bankId) {
         return apiClient.getBaseUrl()
-                        .replace("{userUuid}", userUUID.toString())
+                        .replace("{userUuid}", userUUID)
                         .replace("{accountId}", accountId)
                         .replace("{bankId}", bankId);
     }

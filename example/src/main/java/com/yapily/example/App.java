@@ -2,8 +2,8 @@ package com.yapily.example;
 
 import java.util.stream.Collectors;
 
-import com.yapily.api.client.AcaciaApi;
-import com.yapily.api.client.models.acacia.Bank;
+import com.yapily.sdk.AcaciaApi;
+import com.yapily.api.client.model.Bank;
 import com.yapily.sdk.services.acacia.Banks;
 
 /**

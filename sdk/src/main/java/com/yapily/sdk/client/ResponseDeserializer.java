@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.http.HttpStatus;
 import org.apache.http.entity.ContentType;
 
@@ -30,6 +31,7 @@ public class ResponseDeserializer<T> {
 
     public T getObject(InputStream content) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
         T result = null;
         final String text = getContent(content);
         try {

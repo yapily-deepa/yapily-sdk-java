@@ -4,7 +4,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 
-import com.yapily.api.client.AcaciaApi;
+import com.yapily.sdk.AcaciaApi;
 import com.google.common.base.Strings;
 
 public class SystemPropertiesCredentialsProvider extends BasicCredentialsProvider {

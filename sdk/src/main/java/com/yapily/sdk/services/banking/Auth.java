@@ -8,7 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.yapily.auth.client.AcaciaAuth;
+import com.yapily.sdk.AcaciaAuth;
 import com.yapily.sdk.client.exceptions.ApiException;
 import com.yapily.sdk.services.AuthClient;
 
@@ -22,7 +22,7 @@ public class Auth extends AuthClient {
         super(rootUrl, AcaciaAuth.PATH_DIRECT);
     }
 
-    public URI authDirectURL(UUID applicationUuid, UUID userUuid, String bankId, String callbackUrl, String scope) {
+    public URI authDirectURL(UUID applicationUuid, String userUuid, String bankId, String callbackUrl, String scope) {
         try {
             final URIBuilder uriBuilder = new URIBuilder(getBaseDirectUrl());
             uriBuilder.addParameter(AcaciaAuth.PARAMETER_BANK_ID, bankId);
@@ -33,10 +33,10 @@ public class Auth extends AuthClient {
         }
     }
 
-    private List<NameValuePair> uriParameters(UUID applicationUuid, UUID userUuid, String callbackUrl, String scope) {
+    private List<NameValuePair> uriParameters(UUID applicationUuid, String userUuid, String callbackUrl, String scope) {
         List<NameValuePair> uriParameters = new ArrayList<>();
         uriParameters.add(new BasicNameValuePair(AcaciaAuth.PARAMETER_APPLICATION_ID, applicationUuid.toString()));
-        uriParameters.add(new BasicNameValuePair(AcaciaAuth.PARAMETER_USER_ID, userUuid.toString()));
+        uriParameters.add(new BasicNameValuePair(AcaciaAuth.PARAMETER_USER_ID, userUuid));
         if (callbackUrl != null) uriParameters.add(new BasicNameValuePair(AcaciaAuth.PARAMETER_CALLBACK_URL, callbackUrl));
         if (scope != null) uriParameters.add(new BasicNameValuePair(AcaciaAuth.PARAMETER_SCOPE, scope));
         return uriParameters;

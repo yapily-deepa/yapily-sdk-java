@@ -1,6 +1,6 @@
 package com.yapily.sdk.client.banking;
 
-import com.yapily.api.client.models.banking.Identity;
+import com.yapily.api.client.model.Identity;
 import com.yapily.sdk.client.BaseHttpRpc;
 import com.yapily.sdk.client.ResponseDeserializer;
 import com.yapily.sdk.client.SystemPropertiesCredentialsProvider;
@@ -18,13 +18,13 @@ public class HttpIdentitiesRpc extends BaseHttpRpc {
         this.apiClient = apiClient;
     }
 
-    public Identity getIdentity(UUID userUUID, String bankId) {
+    public Identity getIdentity(String userUUID, String bankId) {
         return requestGet(getIdentityUrl(userUUID, bankId), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    private String getIdentityUrl(UUID userUUID, String bankId) {
+    private String getIdentityUrl(String userUUID, String bankId) {
         return apiClient.getBaseUrl()
-                        .replace("{userUuid}", userUUID.toString())
+                        .replace("{userUuid}", userUUID)
                         .replace("{bankId}", bankId);
     }
 

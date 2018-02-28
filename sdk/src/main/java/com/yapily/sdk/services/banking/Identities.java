@@ -1,7 +1,7 @@
 package com.yapily.sdk.services.banking;
 
-import com.yapily.api.client.AcaciaApi;
-import com.yapily.api.client.models.banking.Identity;
+import com.yapily.sdk.AcaciaApi;
+import com.yapily.api.client.model.Identity;
 import com.yapily.sdk.client.banking.HttpIdentitiesRpc;
 import com.yapily.sdk.services.ApiClient;
 
@@ -15,7 +15,7 @@ public class Identities extends ApiClient {
         super(AcaciaApi.SERVICE_PATH_USERS_BANKS_IDENTITY);
     }
 
-    public Identity getIdentity(UUID userUUID, String bankId) {
+    public Identity getIdentity(String userUUID, String bankId) {
         return identityRpc.getIdentity(userUUID, bankId);
     }
 

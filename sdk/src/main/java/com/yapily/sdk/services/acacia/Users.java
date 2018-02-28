@@ -1,8 +1,8 @@
 package com.yapily.sdk.services.acacia;
 
 
-import com.yapily.api.client.AcaciaApi;
-import com.yapily.api.client.models.acacia.ApplicationUser;
+import com.yapily.sdk.AcaciaApi;
+import com.yapily.api.client.model.ApplicationUser;
 import com.yapily.sdk.client.acacia.HttpUsersRpc;
 import com.yapily.sdk.services.ApiClient;
 

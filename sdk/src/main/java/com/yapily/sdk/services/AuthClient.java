@@ -2,7 +2,7 @@ package com.yapily.sdk.services;
 
 import java.util.logging.Logger;
 
-import com.yapily.auth.client.AcaciaAuth;
+import com.yapily.sdk.AcaciaAuth;
 import com.google.common.base.Preconditions;
 
 public class AuthClient {

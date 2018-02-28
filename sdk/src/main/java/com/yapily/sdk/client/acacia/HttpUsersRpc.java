@@ -1,7 +1,7 @@
 package com.yapily.sdk.client.acacia;
 
 
-import com.yapily.api.client.models.acacia.ApplicationUser;
+import com.yapily.api.client.model.ApplicationUser;
 import com.yapily.sdk.client.BaseHttpRpc;
 import com.yapily.sdk.client.RequestSerializer;
 import com.yapily.sdk.client.ResponseDeserializer;
@@ -33,19 +33,19 @@ public class HttpUsersRpc extends BaseHttpRpc {
         return requestPost(apiClient.getBaseUrl(), appUserId, requestSerializer, responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public void putUser(UUID uuid, ApplicationUser applicationUser) {
+    public void putUser(String uuid, ApplicationUser applicationUser) {
         requestPut(getApplicationUserUrl(uuid), applicationUser, requestSerializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public void deleteUser(UUID uuid) {
+    public void deleteUser(String uuid) {
         requestDelete(getApplicationUserUrl(uuid), SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public ApplicationUser getUser(UUID uuid) {
+    public ApplicationUser getUser(String uuid) {
         return requestGet(getApplicationUserUrl(uuid), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    private String getApplicationUserUrl(UUID userUuid) {
-        return apiClient.getBaseUrl() + userUuid.toString();
+    private String getApplicationUserUrl(String userUuid) {
+        return apiClient.getBaseUrl() + userUuid;
     }
 }

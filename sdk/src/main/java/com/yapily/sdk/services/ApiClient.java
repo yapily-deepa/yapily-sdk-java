@@ -2,7 +2,7 @@ package com.yapily.sdk.services;
 
 import java.util.logging.Logger;
 
-import com.yapily.api.client.AcaciaApi;
+import com.yapily.sdk.AcaciaApi;
 import com.google.common.base.Preconditions;
 
 public class ApiClient {

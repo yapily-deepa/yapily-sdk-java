@@ -2,7 +2,7 @@ package com.yapily.sdk.client.acacia;
 
 import java.util.List;
 
-import com.yapily.api.client.models.acacia.Bank;
+import com.yapily.api.client.model.Bank;
 import com.yapily.sdk.client.BaseHttpRpc;
 import com.yapily.sdk.client.RequestSerializer;
 import com.yapily.sdk.client.ResponseDeserializer;
