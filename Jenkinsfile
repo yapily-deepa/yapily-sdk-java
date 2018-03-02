@@ -2,7 +2,7 @@
 
 node {
 
-    def helper = new com.yapily.jenkins.Helper()
+    def helper = new yapily.jenkins.Helper()
 
     properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactNumToKeepStr: '5', numToKeepStr: '5']]])
 
