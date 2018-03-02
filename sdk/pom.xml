@@ -27,7 +27,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <yapily-api-version>0.0.1-SNAPSHOT</yapily-api-version>
-        <yapily-auth-version>0.0.1-SNAPSHOT</yapily-auth-version>
     </properties>
 
     <dependencies>
@@ -61,11 +60,6 @@
             <groupId>yapily</groupId>
             <artifactId>api-client</artifactId>
             <version>${yapily-api-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>yapily</groupId>
-            <artifactId>auth-client</artifactId>
-            <version>${yapily-auth-version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
