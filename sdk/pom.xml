@@ -16,7 +16,7 @@
     </repositories>
 
 
-    <groupId>com.yapily</groupId>
+    <groupId>yapily</groupId>
     <artifactId>sdk</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
@@ -58,12 +58,12 @@
             <version>5.0.0</version>
         </dependency>
         <dependency>
-            <groupId>com.yapily</groupId>
+            <groupId>yapily</groupId>
             <artifactId>api-client</artifactId>
             <version>${yapily-api-version}</version>
         </dependency>
         <dependency>
-            <groupId>com.yapily</groupId>
+            <groupId>yapily</groupId>
             <artifactId>auth-client</artifactId>
             <version>${yapily-auth-version}</version>
         </dependency>

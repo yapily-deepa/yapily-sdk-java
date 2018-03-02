@@ -15,7 +15,7 @@
 	</repositories>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.yapily</groupId>
+    <groupId>yapily</groupId>
     <artifactId>example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>yapily-sdk-examples</name>
@@ -30,7 +30,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.yapily</groupId>
+			<groupId>yapily</groupId>
 			<artifactId>sdk</artifactId>
 			<version>${yapily-sdk-version}</version>
 		</dependency>
