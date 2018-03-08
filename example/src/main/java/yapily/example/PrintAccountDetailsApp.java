@@ -1,12 +1,12 @@
 package yapily.example;
 
-import yapily.sdk.AcaciaApi;
 import yapily.api.client.model.ApplicationUser;
 import yapily.api.client.model.Account;
 import yapily.api.client.model.Identity;
 import yapily.api.client.model.Transaction;
-import yapily.sdk.services.acacia.Banks;
-import yapily.sdk.services.acacia.Users;
+import yapily.sdk.YapilyApi;
+import yapily.sdk.services.yapily.Banks;
+import yapily.sdk.services.yapily.Users;
 import yapily.sdk.services.banking.Accounts;
 import yapily.sdk.services.banking.Auth;
 import yapily.sdk.services.banking.Identities;
@@ -22,19 +22,19 @@ import java.util.UUID;
 /**
  * This example simulates creating and authenticating a bank user, returning
  * normalised data from Accounts, Transactions and Identity endpoints.
- * Application credentials must be created and managed in the Acacia Dashboard Application.
+ * Application credentials must be created and managed in the Yapily Dashboard Application.
  * For demo purposes, the application ID and secret are included as constants.
  */
 public class PrintAccountDetailsApp {
     public static void main(String[] args) {
-        System.out.println("Hello Acacia API!");
+        System.out.println("Hello Yapily API!");
 
         UUID applicationId = UUID.fromString(Constants.APPLICATION_ID);
         String applicationSecret = Constants.APPLICATION_SECRET;
 
         // Set access credentials
-        System.setProperty(AcaciaApi.API_APPLICATION_ID_ENV_NAME, applicationId.toString());
-        System.setProperty(AcaciaApi.API_APPLICATION_SECRET_ENV_NAME, applicationSecret);
+        System.setProperty(YapilyApi.API_APPLICATION_ID_ENV_NAME, applicationId.toString());
+        System.setProperty(YapilyApi.API_APPLICATION_SECRET_ENV_NAME, applicationSecret);
 
         // Create a user for this application
         final Users usersApi = new Users();

@@ -2,24 +2,24 @@ package yapily.example;
 
 import java.util.stream.Collectors;
 
-import yapily.sdk.AcaciaApi;
+import yapily.sdk.YapilyApi;
 import yapily.api.client.model.Bank;
-import yapily.sdk.services.acacia.Banks;
+import yapily.sdk.services.yapily.Banks;
 
 /**
- * Hello Acacia! This example lists all banks' names retrieved from the Acacia API server using the
- * Acacia SDK
+ * Hello Yapily! This example lists all banks' names retrieved from the Yapily API server using the
+ * Yapily SDK
  *
  */
 public class GetBanksApp {
 
   public static void main(String[] args) {
 
-    System.out.println("Hello Acacia API!");
+    System.out.println("Hello Yapily API!");
 
     // Set access credentials
-    System.setProperty(AcaciaApi.API_APPLICATION_ID_ENV_NAME, Constants.APPLICATION_ID);
-    System.setProperty(AcaciaApi.API_APPLICATION_SECRET_ENV_NAME, Constants.APPLICATION_SECRET);
+    System.setProperty(YapilyApi.API_APPLICATION_ID_ENV_NAME, Constants.APPLICATION_ID);
+    System.setProperty(YapilyApi.API_APPLICATION_SECRET_ENV_NAME, Constants.APPLICATION_SECRET);
 
     System.out.println("Set application credentials as system properties");
 

@@ -1,4 +1,4 @@
-package yapily.sdk.services.acacia;
+package yapily.sdk.services.yapily;
 
 import java.util.List;
 
