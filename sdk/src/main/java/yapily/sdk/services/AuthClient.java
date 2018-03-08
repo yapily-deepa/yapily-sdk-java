@@ -2,7 +2,7 @@ package yapily.sdk.services;
 
 import java.util.logging.Logger;
 
-import yapily.sdk.AcaciaAuth;
+import yapily.sdk.YapilyAuth;
 import com.google.common.base.Preconditions;
 
 public class AuthClient {
@@ -11,12 +11,12 @@ public class AuthClient {
 
     // Note: Leave this static initializer at the top of the file.
     static {
-        Preconditions.checkState(AcaciaAuth.MAJOR_VERSION == 0 &&
-                                 AcaciaAuth.MINOR_VERSION >= 0,
+        Preconditions.checkState(YapilyAuth.MAJOR_VERSION == 0 &&
+                                 YapilyAuth.MINOR_VERSION >= 0,
                                  "You are currently running with version %s of acacia-auth-client. " +
                                  "You need at least version 0.0 of acacia-auth-client to run version " +
                                  "0.0.1 of the Acacia SDK library.",
-                                 AcaciaAuth.VERSION);
+                                 YapilyAuth.VERSION);
     }
 
     /**
@@ -24,8 +24,8 @@ public class AuthClient {
      * normally should not be changed.
      */
     static final String DEFAULT_ROOT_URL =
-            System.getenv().getOrDefault(AcaciaAuth.DEFAULT_ROOT_URL_ENV_NAME,
-                                         System.getProperty(AcaciaAuth.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8082/"));
+            System.getenv().getOrDefault(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME,
+                                         System.getProperty(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8082/"));
 
     private final String rootUrl;
 

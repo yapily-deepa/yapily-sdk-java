@@ -2,7 +2,7 @@ package yapily.sdk.services;
 
 import java.util.logging.Logger;
 
-import yapily.sdk.AcaciaApi;
+import yapily.sdk.YapilyApi;
 import com.google.common.base.Preconditions;
 
 public class ApiClient {
@@ -11,12 +11,12 @@ public class ApiClient {
 
     // Note: Leave this static initializer at the top of the file.
     static {
-        Preconditions.checkState(AcaciaApi.MAJOR_VERSION == 0 &&
-                                 AcaciaApi.MINOR_VERSION >= 0,
+        Preconditions.checkState(YapilyApi.MAJOR_VERSION == 0 &&
+                                 YapilyApi.MINOR_VERSION >= 0,
                                  "You are currently running version %s of the Yapily API client. " +
                                  "You need at least version 1.0.0 of the client to run version " +
                                  "0.0.1 of the Acacia SDK library.",
-                                 AcaciaApi.VERSION);
+                                 YapilyApi.VERSION);
     }
 
     /**
@@ -24,8 +24,8 @@ public class ApiClient {
      * normally should not be changed.
      */
     static final String DEFAULT_ROOT_URL =
-            System.getenv().getOrDefault(AcaciaApi.DEFAULT_ROOT_URL_ENV_NAME,
-                                         System.getProperty(AcaciaApi.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8081"));
+            System.getenv().getOrDefault(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME,
+                                         System.getProperty(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8081"));
 
     /**
      * Root URL of the service, for example {@code "https://api.acaciaconnect.com/"}. Must be

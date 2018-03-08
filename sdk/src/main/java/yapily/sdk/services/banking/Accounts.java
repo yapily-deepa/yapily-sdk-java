@@ -2,7 +2,7 @@ package yapily.sdk.services.banking;
 
 import java.util.List;
 
-import yapily.sdk.AcaciaApi;
+import yapily.sdk.YapilyApi;
 import yapily.api.client.model.Account;
 import yapily.sdk.client.banking.HttpAccountsRpc;
 import yapily.sdk.services.ApiClient;
@@ -12,7 +12,7 @@ public class Accounts extends ApiClient {
     HttpAccountsRpc accountsRpc = new HttpAccountsRpc(this);
 
     public Accounts() {
-        super(AcaciaApi.SERVICE_PATH_USERS_BANKS_ACCOUNTS);
+        super(YapilyApi.SERVICE_PATH_USERS_BANKS_ACCOUNTS);
     }
 
     public List<Account> listAccounts(String userUuid, String bankId) {

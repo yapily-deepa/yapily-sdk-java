@@ -1,6 +1,6 @@
 package yapily.sdk;
 
-public class AcaciaAuth {
+public class YapilyAuth {
   // NOTE: Integer instead of int so compiler thinks it isn't a constant, so it won't inline it
   /**
    * Major part of the current release version.
@@ -29,6 +29,6 @@ public class AcaciaAuth {
   public static final String PARAMETER_CALLBACK_URL = "callback";
   public static final String PARAMETER_SCOPE = "scope";
 
-  public static final String DEFAULT_ROOT_URL_ENV_NAME = "ACACIA_AUTH_URL";
+  public static final String DEFAULT_ROOT_URL_ENV_NAME = "YAPILY_AUTH_URL";
 
 }

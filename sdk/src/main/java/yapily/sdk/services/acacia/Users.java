@@ -1,7 +1,7 @@
 package yapily.sdk.services.acacia;
 
 
-import yapily.sdk.AcaciaApi;
+import yapily.sdk.YapilyApi;
 import yapily.api.client.model.ApplicationUser;
 import yapily.sdk.client.acacia.HttpUsersRpc;
 import yapily.sdk.services.ApiClient;
@@ -14,11 +14,11 @@ public class Users extends ApiClient {
     HttpUsersRpc rpc = new HttpUsersRpc(this);
 
     public Users() {
-        super(AcaciaApi.SERVICE_PATH_USERS);
+        super(YapilyApi.SERVICE_PATH_USERS);
     }
 
     public Users(String rootUrl) {
-        super(rootUrl, AcaciaApi.SERVICE_PATH_USERS);
+        super(rootUrl, YapilyApi.SERVICE_PATH_USERS);
     }
 
     public List<ApplicationUser> listUsers(UUID applicationUuid) {

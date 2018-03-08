@@ -1,6 +1,6 @@
 package yapily.sdk;
 
-public class AcaciaApi {
+public class YapilyApi {
   // NOTE: Integer instead of int so compiler thinks it isn't a constant, so it won't inline it
   /**
    * Major part of the current release version.
@@ -32,8 +32,8 @@ public class AcaciaApi {
   public static final String SERVICE_PATH_USERS_BANKS_ACCOUNT = "/user/{userUuid}/banks/{bankId}/accounts/{accountId}";
   public static final String SERVICE_PATH_USERS_BANKS_ACCOUNTS_TRANSACTIONS = "/user/{userUuid}/banks/{bankId}/accounts/{accountId}/transactions";
 
-  public static final String API_APPLICATION_ID_ENV_NAME = "ACACIA_API_APPLICATION_ACCESS_KEY";
-  public static final String API_APPLICATION_SECRET_ENV_NAME = "ACACIA_API_APPLICATION_ACCESS_SECRET";
-  public static final String DEFAULT_ROOT_URL_ENV_NAME = "ACACIA_API_URL";
+  public static final String API_APPLICATION_ID_ENV_NAME = "YAPILY_API_APPLICATION_ACCESS_KEY";
+  public static final String API_APPLICATION_SECRET_ENV_NAME = "YAPILY_API_APPLICATION_ACCESS_SECRET";
+  public static final String DEFAULT_ROOT_URL_ENV_NAME = "YAPILY_API_URL";
 
 }
