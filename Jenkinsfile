@@ -17,7 +17,7 @@ node {
 
 
     def GCLOUD_SERVICE_ACCOUNT = params.GcloudServiceAccount
-    sh "gcloud auth activate-service-account ${GCLOUD_SERVICE_ACCOUNT} --key-file=/home/tomcat/gcloud-jenkins-acacia-service-account-credentials.json"
+    sh "gcloud auth activate-service-account ${params.GcloudServiceAccount} --key-file=/home/tomcat/gcloud-jenkins-acacia-service-account-credentials.json"
 
     withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
 
