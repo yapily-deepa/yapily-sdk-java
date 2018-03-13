@@ -1,0 +1,29 @@
+group 'yapily'
+version '0.0.1-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://maven.yapily.com/"
+        }
+        mavenLocal()
+    }
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://maven.yapily.com/"
+    }
+}
+
+dependencies {
+    compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'
+    compile group: 'yapily', name: 'api-client', version: '0.0.1-SNAPSHOT'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
