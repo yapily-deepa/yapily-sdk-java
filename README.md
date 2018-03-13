@@ -1,22 +1,72 @@
-In order to use the maven repo include the below in your repositories project
+#Yapily Java SDK
 
-    <repositories>
-        <repository>
-            <id>yapily-repo</id>
-            <name>yapily-repo</name>
-            <url>http://maven.yapily.com/</url>
-        </repository>
-    </repositories>
-    
-Then specify the dependencies you need
+This SDK serves both as a module that can be included in any project connecting to the Yapily API and retrieving a normalised model for all
+connected banks, as well as an example of how to connect to the API should you choose integrate your own solution.
 
-    <dependencies>
-        <dependency>
-            <groupId>com.yapily</groupId>
-            <artifactId>sdk</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+##Requirements
 
-This repo includes a Java SDK to connect to Yapily as well as examples of how to use this SDK
-to connect to the available banking APIs and get some customer data. 
+To connect to the Yapily API, you will need to register your application at [https://dashboard.yapily.com]()
+
+You will need your application credentials to authorise all requests to the API.
+
+##Installation
+
+The SDK is currently available in the Yapily Maven repository and can be included in your project 
+by adding it to your dependencies
+
+####Maven
+
+Add maven repository:
+
+```
+<repositories>
+   <!-- other repos-->
+   <repository>
+       <id>yapily-repo</id>
+       <name>yapily-repo</name>
+       <url>http://maven.yapily.com/</url>
+   </repository>
+</repositories>
+```
+
+Specify the dependency:
+
+```
+<dependencies>
+   <dependency>
+       <groupId>yapily</groupId>
+       <artifactId>sdk</artifactId>
+       <version>0.0.1-SNAPSHOT</version>
+   </dependency>
+</dependencies>
+```
+
+####Gradle
+
+Add maven repository:
+
+```
+repositories {
+    // other repos
+    maven {
+        url "http://maven.yapily.com/"
+    }
+}
+```
+
+`compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'`
+
+####Download JAR
+
+The JAR can be downloaded from a tagged release, or this project can be cloned/downloaded and packaged into a library JAR to be included
+in your project with `mvn install`.
+
+##Usage
+
+Sample usage of the SDK can be seen in `example`:
+
+- Retrieve a list of available banks to connect to
+- Creating users and retrieving users for an application registered in the Yapily Dashboard
+- Retrieving the authorisation URL for a bank and directing the user to fill login credentials
+- Returning user account details
+- Returning user transaction details
