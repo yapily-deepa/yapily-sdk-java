@@ -3,7 +3,7 @@ package yapily.sdk.services.yapily;
 
 import yapily.sdk.YapilyApi;
 import yapily.api.client.model.ApplicationUser;
-import yapily.sdk.client.acacia.HttpUsersRpc;
+import yapily.sdk.client.yapily.HttpUsersRpc;
 import yapily.sdk.services.ApiClient;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class Users extends ApiClient {
 
-    HttpUsersRpc rpc = new HttpUsersRpc(this);
+    private HttpUsersRpc rpc = new HttpUsersRpc(this);
 
     public Users() {
         super(YapilyApi.SERVICE_PATH_USERS);
@@ -21,7 +21,11 @@ public class Users extends ApiClient {
         super(rootUrl, YapilyApi.SERVICE_PATH_USERS);
     }
 
-    public List<ApplicationUser> listUsers(UUID applicationUuid) {
+    public ApplicationUser getUser(String uuid) {
+        return rpc.getUser(uuid);
+    }
+
+    public List<ApplicationUser> listUsers() {
         return rpc.listUsers();
     }
 

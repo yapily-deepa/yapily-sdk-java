@@ -1,4 +1,4 @@
-package yapily.sdk.client.acacia;
+package yapily.sdk.client.yapily;
 
 
 import yapily.api.client.model.ApplicationUser;

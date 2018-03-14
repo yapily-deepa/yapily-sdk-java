@@ -16,7 +16,7 @@
     </repositories>
 
     <groupId>yapily</groupId>
-    <artifactId>sdk</artifactId>
+    <artifactId>yapily-sdk-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 

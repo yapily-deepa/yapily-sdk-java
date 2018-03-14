@@ -9,10 +9,14 @@ import yapily.sdk.services.ApiClient;
 
 public class Accounts extends ApiClient {
 
-    HttpAccountsRpc accountsRpc = new HttpAccountsRpc(this);
+    private HttpAccountsRpc accountsRpc = new HttpAccountsRpc(this);
 
     public Accounts() {
         super(YapilyApi.SERVICE_PATH_USERS_BANKS_ACCOUNTS);
+    }
+
+    public Account getAccount(String userUuid, String bankId, String accountId){
+        return accountsRpc.getAccount(userUuid, bankId, accountId);
     }
 
     public List<Account> listAccounts(String userUuid, String bankId) {

@@ -12,6 +12,6 @@ public class Constants {
     /**
      * Provide your callback URL to redirect the customer back to following bank authorisation
      */
-    public final static String CALLBACK_URL = "http://localhost";
+    public final static String CALLBACK_URL = "http://localhost:8080/dummy-callback";
 
 }

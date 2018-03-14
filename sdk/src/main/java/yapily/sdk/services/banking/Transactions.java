@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Transactions extends ApiClient {
 
-    HttpTransactionsRpc transactionsRpc = new HttpTransactionsRpc(this);
+    private HttpTransactionsRpc transactionsRpc = new HttpTransactionsRpc(this);
 
     public Transactions() {
         super(YapilyApi.SERVICE_PATH_USERS_BANKS_ACCOUNTS_TRANSACTIONS);

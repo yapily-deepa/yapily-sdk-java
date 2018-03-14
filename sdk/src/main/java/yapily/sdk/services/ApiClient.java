@@ -15,7 +15,7 @@ public class ApiClient {
                                  YapilyApi.MINOR_VERSION >= 0,
                                  "You are currently running version %s of the Yapily API client. " +
                                  "You need at least version 1.0.0 of the client to run version " +
-                                 "0.0.1 of the Acacia SDK library.",
+                                 "0.0.1 of the Yapily SDK library.",
                                  YapilyApi.VERSION);
     }
 
@@ -28,7 +28,7 @@ public class ApiClient {
                                          System.getProperty(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8081"));
 
     /**
-     * Root URL of the service, for example {@code "https://api.acaciaconnect.com/"}. Must be
+     * Root URL of the service, for example {@code "https://api.yapily.com/"}. Must be
      * URL-encoded and must end with a "/".
      */
     private final String rootUrl;
