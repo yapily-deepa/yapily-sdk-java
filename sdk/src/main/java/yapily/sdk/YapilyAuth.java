@@ -1,25 +1,6 @@
 package yapily.sdk;
 
 public class YapilyAuth {
-  // NOTE: Integer instead of int so compiler thinks it isn't a constant, so it won't inline it
-  /**
-   * Major part of the current release version.
-   */
-  public static final Integer MAJOR_VERSION = 0;
-
-  /**
-   * Minor part of the current release version.
-   */
-  public static final Integer MINOR_VERSION = 0;
-
-  /**
-   * Fix part of the current release version.
-   */
-  public static final Integer FIX_VERSION = 1;
-
-  /** Current release version. */
-  // NOTE: toString() so compiler thinks it isn't a constant, so it won't inline it
-  public static final String VERSION = (MAJOR_VERSION + "." + MINOR_VERSION + "." + FIX_VERSION).toString();
 
   public static final String PATH_DIRECT = "/direct";
 

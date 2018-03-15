@@ -3,16 +3,35 @@ package yapily.sdk.services;
 import yapily.sdk.YapilyAuth;
 import com.google.common.base.Preconditions;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class AuthClient {
 
     // Note: Leave this static initializer at the top of the file.
     static {
-        Preconditions.checkState(YapilyAuth.MAJOR_VERSION == 0 &&
-                                 YapilyAuth.MINOR_VERSION >= 0,
-                                 "You are currently running version %s of the yapily auth-client. " +
-                                 "You need at least version 0.0 of yapily auth-client to run version " +
-                                 "0.0.1 of the Yapily SDK library.",
-                                 YapilyAuth.VERSION);
+        Properties props = new Properties();
+        InputStream is = AuthClient.class.getClassLoader().getResourceAsStream("project.properties");
+        try {
+            props.load(is);
+
+            final String authVersion = props.getProperty("yapily.auth-client.version");
+            String[] versionParts = authVersion.split("\\.");
+            final int authMajorVersion = Integer.parseInt(versionParts[0]);
+            final int authMinorVersion = Integer.parseInt(versionParts[1]);
+
+            final String sdkVersion = props.getProperty("yapily.sdk.version");
+
+            Preconditions.checkState(authMajorVersion == 0 &&
+                                     authMinorVersion >= 0,
+                                     "You are currently running version %s of the Yapily Auth client. " +
+                                     "You need at least version 0.0.1 of the client to run version " +
+                                     "%s of the Yapily SDK library.",
+                                     authVersion, sdkVersion);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
