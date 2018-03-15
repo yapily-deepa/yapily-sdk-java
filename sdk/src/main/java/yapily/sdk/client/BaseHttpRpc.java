@@ -16,21 +16,21 @@ import java.io.UnsupportedEncodingException;
 
 public class BaseHttpRpc {
 
-    public <T> T requestGet(String url, ResponseDeserializer<T> responseDeserializer, CredentialsProvider credentialsProvider) {
+    protected <T> T requestGet(String url, ResponseDeserializer<T> responseDeserializer, CredentialsProvider credentialsProvider) {
         return executeRequest(new HttpGet(url), responseDeserializer, credentialsProvider);
     }
 
-    public void requestDelete(String url, CredentialsProvider credentialsProvider) {
+    protected void requestDelete(String url, CredentialsProvider credentialsProvider) {
         final HttpDelete httpRequest = new HttpDelete(url);
         executeRequest(httpRequest, null, credentialsProvider);
     }
 
-    public void requestPut(String url, Object object, RequestSerializer requestSerializer, CredentialsProvider credentialsProvider) {
+    protected void requestPut(String url, Object object, RequestSerializer requestSerializer, CredentialsProvider credentialsProvider) {
         final HttpPut httpRequest = new HttpPut(url);
         executeRequestWithEnclosingEntity(httpRequest, object, requestSerializer, null, credentialsProvider);
     }
 
-    public <T> T requestPost(String url, Object entity, RequestSerializer requestSerializer, ResponseDeserializer<T> responseDeserializer, CredentialsProvider credentialsProvider) {
+    protected <T> T requestPost(String url, Object entity, RequestSerializer requestSerializer, ResponseDeserializer<T> responseDeserializer, CredentialsProvider credentialsProvider) {
         final HttpPost httpRequest = new HttpPost(url);
         return executeRequestWithEnclosingEntity(httpRequest, entity, requestSerializer, responseDeserializer, credentialsProvider);
     }

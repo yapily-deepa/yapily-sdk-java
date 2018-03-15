@@ -2,7 +2,9 @@ package yapily.sdk.services.banking;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URIBuilder;

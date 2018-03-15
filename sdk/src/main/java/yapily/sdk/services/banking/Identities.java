@@ -7,7 +7,7 @@ import yapily.sdk.services.ApiClient;
 
 public class Identities extends ApiClient {
 
-    HttpIdentitiesRpc identityRpc = new HttpIdentitiesRpc(this);
+    private HttpIdentitiesRpc identityRpc = new HttpIdentitiesRpc(this);
 
     public Identities() {
         super(YapilyApi.SERVICE_PATH_USERS_BANKS_IDENTITY);

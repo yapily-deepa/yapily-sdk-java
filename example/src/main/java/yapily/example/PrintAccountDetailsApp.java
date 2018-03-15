@@ -12,7 +12,7 @@ import yapily.sdk.services.banking.Auth;
 import yapily.sdk.services.banking.Identities;
 import yapily.sdk.services.banking.Transactions;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -43,13 +43,12 @@ public class PrintAccountDetailsApp {
         Banks banks = new Banks();
 
         // Set user and bank id variables
-        // banks.listBanks().stream().filter(bank -> bank.getId().equals("bbva")).findFirst().get().getId();
         String bankId = "bbva";
-        String userUUID = applicationUser.getUuid();
+        String userUuid = applicationUser.getUuid();
 
         // Send applicationUser to authentication for a bank and add a callback with credentials
         final Auth auth = new Auth();
-        final URI directUrl = auth.authDirectURL(applicationId, userUUID, bankId, Constants.CALLBACK_URL, "account");
+        final URI directUrl = auth.authDirectURL(applicationId, userUuid, bankId, Constants.CALLBACK_URL, "account");
         if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(directUrl);
@@ -63,21 +62,21 @@ public class PrintAccountDetailsApp {
                 // Print out user details
 
                 final Accounts accountsApi = new Accounts();
-                List<Account> accounts = accountsApi.listAccounts(userUUID, bankId);
+                List<Account> accounts = accountsApi.listAccounts(userUuid, bankId);
 
                 System.out.println("**************ACCOUNTS******************");
                 System.out.println(accounts);
                 System.out.println("****************************************");
 
                 final Transactions transactionsApi = new Transactions();
-                List<Transaction> transactions = transactionsApi.listTransactions(userUUID, accounts.get(0).getId(), bankId);
+                List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accounts.get(0).getId(), bankId);
 
                 System.out.println("**************TRANSACTIONS**************");
                 System.out.println(transactions);
                 System.out.println("****************************************");
 
                 Identities identitiesApi = new Identities();
-                Identity identity = identitiesApi.getIdentity(userUUID, bankId);
+                Identity identity = identitiesApi.getIdentity(userUuid, bankId);
 
                 System.out.println("**************IDENTITY******************");
                 System.out.println(identity);

@@ -26,10 +26,18 @@ public class HttpAccountsRpc extends BaseHttpRpc {
         return requestGet(getAccountsUrl(userUuid, bankId), responseDeserializerList, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
+    public Account getAccount(String userUuid, String bankId, String accountId){
+        return requestGet(getAccountsUrl(userUuid, bankId), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+    }
+
     private String getAccountsUrl(String userUuid, String bankId) {
         return apiClient.getBaseUrl()
                         .replace("{userUuid}", userUuid)
                         .replace("{bankId}", bankId);
+    }
+
+    private String getAccountUrl(String userUuid, String bankId, String accountId){
+        return getAccountsUrl(userUuid, bankId) + accountId;
     }
 
 }

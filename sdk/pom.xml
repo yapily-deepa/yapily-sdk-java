@@ -16,7 +16,7 @@
     </repositories>
 
     <groupId>yapily</groupId>
-    <artifactId>sdk</artifactId>
+    <artifactId>yapily-sdk-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
@@ -26,6 +26,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <yapily-api-version>0.0.1-SNAPSHOT</yapily-api-version>
+        <yapily-auth-version>0.0.1-SNAPSHOT</yapily-auth-version>
     </properties>
 
     <dependencies>
@@ -89,5 +90,14 @@
             <version>2.8.11</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 
 </project>

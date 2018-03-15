@@ -4,6 +4,7 @@ import yapily.sdk.YapilyApi;
 import yapily.api.client.model.ApplicationUser;
 import yapily.sdk.services.yapily.Users;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -35,13 +36,13 @@ public class ConfigureUsersApp {
 
         System.out.println("Created users");
 
-        System.out.println(usersApi.listUsers(applicationId));
+        List<ApplicationUser> users = usersApi.listUsers();
+        System.out.println(users);
 
         // List users for this application
-        final String recordsList = usersApi.listUsers(applicationId)
-                                           .stream()
-                                           .map(ApplicationUser::toString)
-                                           .collect(Collectors.joining(System.lineSeparator()));
+        final String recordsList = users.stream()
+                                        .map(ApplicationUser::toString)
+                                        .collect(Collectors.joining(System.lineSeparator()));
 
         System.out.println("List of users:");
         System.out.println(recordsList);
@@ -53,10 +54,9 @@ public class ConfigureUsersApp {
         System.out.println("Updated applicationUserC user ID to UserC: " + applicationUserC.toString());
 
         // List users for this application
-        final String recordsListUpdated = usersApi.listUsers(applicationId)
-                                                  .stream()
-                                                  .map(ApplicationUser::toString)
-                                                  .collect(Collectors.joining(System.lineSeparator()));
+        final String recordsListUpdated = users.stream()
+                                               .map(ApplicationUser::toString)
+                                               .collect(Collectors.joining(System.lineSeparator()));
 
         System.out.println("List updated user:");
         System.out.println(recordsListUpdated);

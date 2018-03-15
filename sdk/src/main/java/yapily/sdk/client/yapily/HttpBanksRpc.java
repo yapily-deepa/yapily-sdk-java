@@ -1,4 +1,4 @@
-package yapily.sdk.client.acacia;
+package yapily.sdk.client.yapily;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ public class HttpBanksRpc extends BaseHttpRpc {
 
     private final ApiClient apiClient;
 
-    ResponseDeserializer<List<Bank>> responseDeserializer = new ResponseDeserializer<>(new TypeReference<List<Bank>>() {
-    });
+    private ResponseDeserializer<List<Bank>> responseDeserializer = new ResponseDeserializer<>(new TypeReference<List<Bank>>() {});
+
     RequestSerializer requestSerializer = new RequestSerializer();
 
     public HttpBanksRpc(ApiClient apiClient) {
