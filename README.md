@@ -33,7 +33,7 @@ Dependency:
 
 ```
 <dependencies>
-   <! -- other dependencies -->
+   <!-- other dependencies -->
    <dependency>
        <groupId>yapily</groupId>
        <artifactId>sdk</artifactId>
