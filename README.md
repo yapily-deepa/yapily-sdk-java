@@ -16,7 +16,7 @@ by adding it to your dependencies
 
 ####Maven
 
-Add maven repository:
+Repository:
 
 ```
 <repositories>
@@ -29,10 +29,11 @@ Add maven repository:
 </repositories>
 ```
 
-Specify the dependency:
+Dependency:
 
 ```
 <dependencies>
+   <! -- other dependencies -->
    <dependency>
        <groupId>yapily</groupId>
        <artifactId>sdk</artifactId>
@@ -43,7 +44,7 @@ Specify the dependency:
 
 ####Gradle
 
-Add maven repository:
+Repository:
 
 ```
 repositories {
@@ -53,6 +54,8 @@ repositories {
     }
 }
 ```
+
+Dependency:
 
 `compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'`
 
@@ -70,3 +73,8 @@ Sample usage of the SDK can be seen in `example`:
 - Retrieving the authorisation URL for a bank and directing the user to fill login credentials
 - Returning user account details
 - Returning user transaction details
+
+##Further information
+
+For more information on how to get connected, visit the
+[Yapily developer resources](https://github.com/yapily/developer-resources) repo.

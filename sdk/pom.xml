@@ -60,7 +60,6 @@
             <groupId>yapily</groupId>
             <artifactId>api-client</artifactId>
             <version>${yapily-api-version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
