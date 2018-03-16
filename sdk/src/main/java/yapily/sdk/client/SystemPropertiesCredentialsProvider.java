@@ -25,8 +25,10 @@ public class SystemPropertiesCredentialsProvider extends BasicCredentialsProvide
     }
 
     synchronized public static SystemPropertiesCredentialsProvider credentialsProvider() {
-        //TODO: check the admin credentials changing to applicationUuid and make this singleton again
-        return new SystemPropertiesCredentialsProvider();
+        if(INSTANCE==null){
+            INSTANCE = new SystemPropertiesCredentialsProvider();
+        }
+        return INSTANCE;
     }
 
 }
