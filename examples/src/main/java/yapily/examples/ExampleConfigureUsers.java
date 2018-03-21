@@ -1,4 +1,4 @@
-package yapily.example;
+package yapily.examples;
 
 import yapily.sdk.YapilyApi;
 import yapily.api.client.model.ApplicationUser;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Application credentials must be created and managed in the Yapily Dashboard Application.
  * For demo purposes, the application ID and secret are included as constants.
  */
-public class ConfigureUsersApp {
+public class ExampleConfigureUsers {
 
     public static void main(String[] args) {
 

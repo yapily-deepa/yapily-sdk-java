@@ -1,4 +1,4 @@
-package yapily.example;
+package yapily.examples;
 
 import yapily.api.client.model.ApplicationUser;
 import yapily.api.client.model.Account;
@@ -25,7 +25,7 @@ import java.util.UUID;
  * Application credentials must be created and managed in the Yapily Dashboard Application.
  * For demo purposes, the application ID and secret are included as constants.
  */
-public class PrintAccountDetailsApp {
+public class ExampleAccountDetails {
     public static void main(String[] args) {
         System.out.println("Hello Yapily API!");
 

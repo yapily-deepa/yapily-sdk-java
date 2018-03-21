@@ -40,7 +40,7 @@ public class AuthClient {
      */
     private static final String DEFAULT_ROOT_URL =
             System.getenv().getOrDefault(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME,
-                                         System.getProperty(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8082/"));
+                                         System.getProperty(YapilyAuth.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8082/"));
 
     private final String rootUrl;
 

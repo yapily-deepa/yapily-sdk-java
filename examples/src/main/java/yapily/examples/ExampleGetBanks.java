@@ -1,4 +1,4 @@
-package yapily.example;
+package yapily.examples;
 
 import java.util.stream.Collectors;
 
@@ -10,7 +10,7 @@ import yapily.sdk.services.yapily.Banks;
  * Hello Yapily! This example lists all banks' names retrieved from the Yapily API server using the
  * Yapily SDK
  */
-public class GetBanksApp {
+public class ExampleGetBanks {
 
     public static void main(String[] args) {
 

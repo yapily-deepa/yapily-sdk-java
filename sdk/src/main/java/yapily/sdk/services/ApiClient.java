@@ -43,7 +43,7 @@ public class ApiClient {
      */
     static final String DEFAULT_ROOT_URL =
             System.getenv().getOrDefault(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME,
-                                         System.getProperty(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME, "http://localhost:8081"));
+                                         System.getProperty(YapilyApi.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8081"));
 
     /**
      * Root URL of the service, for example {@code "https://api.yapily.com/"}. Must be

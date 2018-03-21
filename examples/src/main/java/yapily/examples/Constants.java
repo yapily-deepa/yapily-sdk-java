@@ -1,4 +1,4 @@
-package yapily.example;
+package yapily.examples;
 
 public class Constants {
 
