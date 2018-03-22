@@ -21,7 +21,7 @@ node {
 
         stage('Build') {
             helper.mavenBuild('sdk')
-            helper.mavenBuild('example')
+            helper.mavenBuild('examples')
         }
 
         if(BRANCH_NAME == "master" || BRANCH_NAME =~ "release/") {
@@ -31,7 +31,7 @@ node {
             }
 
             stage('Deploy example') {
-                helper.mavenDeploy('example')
+                helper.mavenDeploy('examples')
             }
 
         }
