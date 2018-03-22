@@ -30,7 +30,7 @@ node {
                 helper.mavenDeploy('sdk')
             }
 
-            stage('Deploy example') {
+            stage('Deploy examples') {
                 helper.mavenDeploy('examples')
             }
 
