@@ -1,4 +1,5 @@
 #Yapily Java SDK
+[![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1-SNAPSHOT&x2=0)](http://badge.fury.io/gh/boennemann%2Fbadges)
 
 This SDK serves both as a module that can be included in any project connecting to the Yapily API and retrieving a normalised model for all
 connected banks, as well as an example of how to connect to the API should you choose integrate your own solution.
