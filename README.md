@@ -18,7 +18,7 @@ by adding it to your dependencies
 
 Repository:
 
-```
+```xml
 <repositories>
    <!-- other repos-->
    <repository>
@@ -31,7 +31,7 @@ Repository:
 
 Dependency:
 
-```
+```xml
 <dependencies>
    <!-- other dependencies -->
    <dependency>
@@ -46,7 +46,7 @@ Dependency:
 
 Repository:
 
-```
+```groovy
 repositories {
     // other repos
     maven {
@@ -57,7 +57,9 @@ repositories {
 
 Dependency:
 
-`compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'`
+```groovy
+compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'
+```
 
 ####Download JAR
 
