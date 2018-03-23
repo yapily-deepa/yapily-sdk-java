@@ -5,7 +5,6 @@ import yapily.api.client.model.Account;
 import yapily.api.client.model.Identity;
 import yapily.api.client.model.Transaction;
 import yapily.sdk.YapilyApi;
-import yapily.sdk.services.yapily.Banks;
 import yapily.sdk.services.yapily.Users;
 import yapily.sdk.services.banking.Accounts;
 import yapily.sdk.services.banking.Auth;
@@ -26,6 +25,7 @@ import java.util.UUID;
  * For demo purposes, the application ID and secret are included as constants.
  */
 public class ExampleAccountDetails {
+
     public static void main(String[] args) {
         System.out.println("Hello Yapily API!");
 
@@ -40,7 +40,6 @@ public class ExampleAccountDetails {
         final Users usersApi = new Users();
         final ApplicationUser applicationUser = usersApi.createUser(UUID.randomUUID().toString());
         System.out.println("Created applicationUser with uuid: " + applicationUser.getUuid());
-        Banks banks = new Banks();
 
         // Set user and bank id variables
         String bankId = "bbva";
@@ -75,7 +74,7 @@ public class ExampleAccountDetails {
                 System.out.println(transactions);
                 System.out.println("****************************************");
 
-                Identities identitiesApi = new Identities();
+                final Identities identitiesApi = new Identities();
                 Identity identity = identitiesApi.getIdentity(userUuid, bankId);
 
                 System.out.println("**************IDENTITY******************");
@@ -86,7 +85,5 @@ public class ExampleAccountDetails {
                 e.printStackTrace();
             }
         }
-
-
     }
 }
