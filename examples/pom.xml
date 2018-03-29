@@ -16,7 +16,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>yapily</groupId>
-    <artifactId>example</artifactId>
+    <artifactId>yapily-sdk-examples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>yapily-sdk-examples</name>
 

@@ -1,5 +1,6 @@
 group 'yapily'
 version '0.0.1-SNAPSHOT'
+artifactId 'yapily-sdk-examples'
 
 buildscript {
     repositories {
