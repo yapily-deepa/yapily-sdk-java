@@ -29,18 +29,17 @@ public class ExampleAccountDetails {
     public static void main(String[] args) {
         System.out.println("Hello Yapily API!");
 
-        UUID applicationId = UUID.fromString(Constants.APPLICATION_ID);
+        String applicationId = Constants.APPLICATION_ID;
         String applicationSecret = Constants.APPLICATION_SECRET;
 
         // Set access credentials
-        System.setProperty(YapilyApi.API_APPLICATION_ID_ENV_NAME, applicationId.toString());
+        System.setProperty(YapilyApi.API_APPLICATION_ID_ENV_NAME, applicationId);
         System.setProperty(YapilyApi.API_APPLICATION_SECRET_ENV_NAME, applicationSecret);
 
         // Create a user for this application
         final Users usersApi = new Users();
         ApplicationUser appUser = new ApplicationUser(UUID.randomUUID().toString());
         final ApplicationUser applicationUser = usersApi.createUser(appUser);
-        applicationUser.setUuid("81bd70e5-294e-4fdb-ac33-65c526d80969");
         System.out.println("Created applicationUser with uuid: " + applicationUser.getUuid());
 
         // Set user and bank id variables

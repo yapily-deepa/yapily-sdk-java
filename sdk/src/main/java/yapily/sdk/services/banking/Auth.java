@@ -24,7 +24,7 @@ public class Auth extends AuthClient {
         super(rootUrl, YapilyAuth.PATH_DIRECT);
     }
 
-    public URI authDirectURL(UUID applicationUuid, String userUuid, String bankId, String callbackUrl, String scope) {
+    public URI authDirectURL(String applicationUuid, String userUuid, String bankId, String callbackUrl, String scope) {
         try {
             final URIBuilder uriBuilder = new URIBuilder(getBaseDirectUrl());
             uriBuilder.addParameter(YapilyAuth.PARAMETER_BANK_ID, bankId);
@@ -35,9 +35,9 @@ public class Auth extends AuthClient {
         }
     }
 
-    private List<NameValuePair> uriParameters(UUID applicationUuid, String userUuid, String callbackUrl, String scope) {
+    private List<NameValuePair> uriParameters(String applicationUuid, String userUuid, String callbackUrl, String scope) {
         List<NameValuePair> uriParameters = new ArrayList<>();
-        uriParameters.add(new BasicNameValuePair(YapilyAuth.PARAMETER_APPLICATION_ID, applicationUuid.toString()));
+        uriParameters.add(new BasicNameValuePair(YapilyAuth.PARAMETER_APPLICATION_ID, applicationUuid));
         uriParameters.add(new BasicNameValuePair(YapilyAuth.PARAMETER_USER_ID, userUuid));
         if (callbackUrl != null) uriParameters.add(new BasicNameValuePair(YapilyAuth.PARAMETER_CALLBACK_URL, callbackUrl));
         if (scope != null) uriParameters.add(new BasicNameValuePair(YapilyAuth.PARAMETER_SCOPE, scope));
