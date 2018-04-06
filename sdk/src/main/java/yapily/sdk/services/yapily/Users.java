@@ -29,8 +29,8 @@ public class Users extends ApiClient {
         return rpc.listUsers();
     }
 
-    public ApplicationUser createUser(String appUserId) {
-        return rpc.postUser(appUserId);
+    public ApplicationUser createUser(ApplicationUser appUser) {
+        return rpc.postUser(appUser);
     }
 
     public void updateUser(UUID applicationUuid, ApplicationUser applicationUser) {

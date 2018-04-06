@@ -28,8 +28,8 @@ public class HttpUsersRpc extends BaseHttpRpc {
         return requestGet(apiClient.getBaseUrl(), responseDeserializerList, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
-    public ApplicationUser postUser(String appUserId) {
-        return requestPost(apiClient.getBaseUrl(), appUserId, requestSerializer, responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public ApplicationUser postUser(ApplicationUser appUser) {
+        return requestPost(apiClient.getBaseUrl(), appUser, requestSerializer, responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
     public void putUser(String uuid, ApplicationUser applicationUser) {

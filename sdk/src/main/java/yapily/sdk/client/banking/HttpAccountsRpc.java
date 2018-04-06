@@ -27,7 +27,7 @@ public class HttpAccountsRpc extends BaseHttpRpc {
     }
 
     public Account getAccount(String userUuid, String bankId, String accountId){
-        return requestGet(getAccountsUrl(userUuid, bankId), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+        return requestGet(getSingleAccountUrl(userUuid, bankId, accountId), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
     }
 
     private String getAccountsUrl(String userUuid, String bankId) {
@@ -36,7 +36,7 @@ public class HttpAccountsRpc extends BaseHttpRpc {
                         .replace("{bankId}", bankId);
     }
 
-    private String getAccountUrl(String userUuid, String bankId, String accountId){
+    private String getSingleAccountUrl(String userUuid, String bankId, String accountId){
         return getAccountsUrl(userUuid, bankId) + accountId;
     }
 

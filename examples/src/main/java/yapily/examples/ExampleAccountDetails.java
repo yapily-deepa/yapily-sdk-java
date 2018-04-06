@@ -38,7 +38,9 @@ public class ExampleAccountDetails {
 
         // Create a user for this application
         final Users usersApi = new Users();
-        final ApplicationUser applicationUser = usersApi.createUser(UUID.randomUUID().toString());
+        ApplicationUser appUser = new ApplicationUser(UUID.randomUUID().toString());
+        final ApplicationUser applicationUser = usersApi.createUser(appUser);
+        applicationUser.setUuid("81bd70e5-294e-4fdb-ac33-65c526d80969");
         System.out.println("Created applicationUser with uuid: " + applicationUser.getUuid());
 
         // Set user and bank id variables

@@ -30,9 +30,9 @@ public class ExampleConfigureUsers {
 
         // Create users for this application
         final Users usersApi = new Users();
-        usersApi.createUser(UUID.randomUUID().toString());
-        usersApi.createUser(UUID.randomUUID().toString());
-        final ApplicationUser applicationUserC = usersApi.createUser(UUID.randomUUID().toString());
+        usersApi.createUser(new ApplicationUser(UUID.randomUUID().toString()));
+        usersApi.createUser(new ApplicationUser(UUID.randomUUID().toString()));
+        final ApplicationUser applicationUserC = usersApi.createUser(new ApplicationUser(UUID.randomUUID().toString()));
 
         System.out.println("Created users");
 
