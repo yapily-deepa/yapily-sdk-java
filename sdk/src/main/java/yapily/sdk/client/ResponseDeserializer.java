@@ -5,14 +5,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.apache.http.HttpStatus;
 import org.apache.http.entity.ContentType;
 
-import yapily.sdk.client.exceptions.ApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.io.CharStreams;
+
+import yapily.sdk.client.exceptions.ApiException;
 
 public class ResponseDeserializer<T> {
 

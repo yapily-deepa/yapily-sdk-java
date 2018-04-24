@@ -1,8 +1,5 @@
 package yapily.sdk.client.exceptions;
 
-import com.google.common.base.MoreObjects;
-
-import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.SocketException;
@@ -10,6 +7,10 @@ import java.net.SocketTimeoutException;
 import java.security.cert.CertificateException;
 import java.util.Objects;
 import java.util.Set;
+
+import javax.net.ssl.SSLHandshakeException;
+
+import com.google.common.base.MoreObjects;
 
 /**
  * Base class for all service exceptions.

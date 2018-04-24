@@ -1,11 +1,12 @@
 package yapily.sdk.services;
 
-import yapily.sdk.YapilyAuth;
-import com.google.common.base.Preconditions;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+
+import com.google.common.base.Preconditions;
+
+import yapily.sdk.YapilyAuth;
 
 public class AuthClient {
 

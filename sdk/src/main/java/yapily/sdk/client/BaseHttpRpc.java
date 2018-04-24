@@ -1,18 +1,26 @@
 package yapily.sdk.client;
 
-import yapily.sdk.client.exceptions.ApiException;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import yapily.sdk.client.exceptions.ApiException;
 
 public class BaseHttpRpc {
 
