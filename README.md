@@ -2,7 +2,7 @@
 [![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1-SNAPSHOT&x2=0)](http://badge.fury.io/gh/boennemann%2Fbadges)
 
 This SDK can be used as a module or an example of how to connect
-to any bank integrated by Yapily.
+to any financial institution integrated by Yapily.
 
 ## Requirements
 
@@ -40,8 +40,8 @@ Dependency:
    <!-- other dependencies -->
    <dependency>
        <groupId>yapily</groupId>
-       <artifactId>sdk</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <artifactId>yapily-sdk-java</artifactId>
+       <version>0.1.2-SNAPSHOT</version>
    </dependency>
 </dependencies>
 ```
@@ -62,7 +62,7 @@ repositories {
 Dependency:
 
 ```groovy
-compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'
+compile group: 'yapily', name: 'yapily-sdk-java', version: '0.1.2-SNAPSHOT'
 ```
 
 #### Download JAR
@@ -75,11 +75,11 @@ library JAR to be included in your project.
 
 Sample usage of the SDK can be seen in the `examples` folder.
 
-- Retrieve a list of available banks to connect to
+- Retrieve a list of available financial institutions to connect to
 
 ```java
-Banks banksApi = new Banks();
-List<Bank> banksList = banksApi.listBanks();
+Institutions institutionsApi = new Institutions();
+List<Institution> institutionList = institutionsApi.listInstitutions();
 ```
 
 - Creating users and retrieving users for your application registered in the Yapily Dashboard
@@ -89,31 +89,31 @@ usersApi.createUser("Bojack");
 List<ApplicationUser> users = usersApi.listUsers();
 ```
 
-- Receiving an authorisation URL your users to log into their bank
+- Receiving an authorisation URL your users to log into their institution
 
 ```java
 Auth auth = new Auth();
-URI directUrl = auth.authDirectURL(applicationId, userUuid, bankId, YOUR_CALLBACK_URL, "account");
+URI directUrl = auth.authDirectURL(applicationId, userUuid, institutionId, YOUR_CALLBACK_URL, "account");
 ```
  
 - Returning user account details
 
 ```java
 Accounts accountsApi = new Accounts();
-List<Account> accounts = accountsApi.listAccounts(userUuid, bankId);
+List<Account> accounts = accountsApi.listAccounts(userUuid, institutionId);
 ```
 
 - Returning user transaction details
 
 ```java
 Transactions transactionsApi = new Transactions();
-List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accountId, bankId);
+List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accountId, institutionId);
 ```
 
 - Returning user identity details
 ```java
 Identities identitiesApi = new Identities();
-Identity identity = identitiesApi.getIdentity(userUuid, bankId);
+Identity identity = identitiesApi.getIdentity(userUuid, institutionId);
 ```
 
 ## Further information
