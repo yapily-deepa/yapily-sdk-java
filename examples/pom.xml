@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+		xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<repositories>
 		<repository>
 			<id>yapily-repo</id>
@@ -14,19 +14,19 @@
 		</repository>
 	</repositories>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>yapily</groupId>
-    <artifactId>yapily-sdk-examples</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
-    <name>yapily-sdk-examples</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>yapily</groupId>
+	<artifactId>yapily-sdk-examples</artifactId>
+	<version>0.1.1-SNAPSHOT</version>
+	<name>yapily-sdk-examples</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <yapily-sdk-java-version>0.0.2-SNAPSHOT</yapily-sdk-java-version>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<yapily-sdk-java-version>0.1.2-SNAPSHOT</yapily-sdk-java-version>
+	</properties>
 
 	<dependencies>
 		<dependency>

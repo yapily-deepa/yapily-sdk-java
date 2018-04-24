@@ -1,16 +1,5 @@
 package yapily.examples;
 
-import yapily.api.client.model.ApplicationUser;
-import yapily.api.client.model.Account;
-import yapily.api.client.model.Identity;
-import yapily.api.client.model.Transaction;
-import yapily.sdk.YapilyApi;
-import yapily.sdk.services.yapily.Users;
-import yapily.sdk.services.banking.Accounts;
-import yapily.sdk.services.banking.Auth;
-import yapily.sdk.services.banking.Identities;
-import yapily.sdk.services.banking.Transactions;
-
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
@@ -18,11 +7,22 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+import yapily.api.client.model.Account;
+import yapily.api.client.model.ApplicationUser;
+import yapily.api.client.model.Identity;
+import yapily.api.client.model.Transaction;
+import yapily.sdk.YapilyApi;
+import yapily.sdk.services.institutions.Accounts;
+import yapily.sdk.services.institutions.Auth;
+import yapily.sdk.services.institutions.Identities;
+import yapily.sdk.services.institutions.Transactions;
+import yapily.sdk.services.yapily.Users;
+
 /**
- * This example simulates creating and authenticating a bank user, returning
- * normalised data from Accounts, Transactions and Identity endpoints.
- * Application credentials must be created and managed in the Yapily Dashboard Application.
- * For demo purposes, the application ID and secret are included as constants.
+ * This example simulates creating and authenticating an institution user, returning normalised data
+ * from Accounts, Transactions and Identity endpoints. Application credentials must be created and
+ * managed in the Yapily Dashboard Application. For demo purposes, the application ID and secret are
+ * included as constants.
  */
 public class ExampleAccountDetails {
 
@@ -38,17 +38,18 @@ public class ExampleAccountDetails {
 
         // Create a user for this application
         final Users usersApi = new Users();
-        ApplicationUser appUser = new ApplicationUser(UUID.randomUUID().toString());
+        ApplicationUser appUser = new ApplicationUser();
+        appUser.setUuid(UUID.randomUUID().toString());
         final ApplicationUser applicationUser = usersApi.createUser(appUser);
         System.out.println("Created applicationUser with uuid: " + applicationUser.getUuid());
 
-        // Set user and bank id variables
-        String bankId = "bbva";
+        // Set user and institution id variables
+        String institutionId = "bbva-sandbox";
         String userUuid = applicationUser.getUuid();
 
-        // Send applicationUser to authentication for a bank and add a callback with credentials
+        // Send applicationUser to authentication for an institution and add a callback with credentials
         final Auth auth = new Auth();
-        final URI directUrl = auth.authDirectURL(applicationId, userUuid, bankId, Constants.CALLBACK_URL, "account");
+        final URI directUrl = auth.authDirectURL(applicationId, userUuid, institutionId, Constants.CALLBACK_URL, "account");
         if (Desktop.isDesktopSupported()) {
             try {
                 Desktop.getDesktop().browse(directUrl);
@@ -62,29 +63,32 @@ public class ExampleAccountDetails {
                 // Print out user details
 
                 final Accounts accountsApi = new Accounts();
-                List<Account> accounts = accountsApi.listAccounts(userUuid, bankId);
+                List<Account> accounts = accountsApi.listAccounts(userUuid, institutionId);
 
                 System.out.println("**************ACCOUNTS******************");
                 System.out.println(accounts);
                 System.out.println("****************************************");
 
                 final Transactions transactionsApi = new Transactions();
-                List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accounts.get(0).getId(), bankId);
+                List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accounts.get(0).getId(), institutionId);
 
                 System.out.println("**************TRANSACTIONS**************");
                 System.out.println(transactions);
                 System.out.println("****************************************");
 
                 final Identities identitiesApi = new Identities();
-                Identity identity = identitiesApi.getIdentity(userUuid, bankId);
+                Identity identity = identitiesApi.getIdentity(userUuid, institutionId);
 
                 System.out.println("**************IDENTITY******************");
                 System.out.println(identity);
                 System.out.println("****************************************");
+
+                reader.close();
 
             } catch (final IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }

@@ -1,5 +1,5 @@
 group 'yapily'
-version '0.0.1-SNAPSHOT'
+version '0.1.1-SNAPSHOT'
 artifactId 'yapily-sdk-examples'
 
 buildscript {
@@ -24,7 +24,6 @@ repositories {
 }
 
 dependencies {
-    compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'
-    compile group: 'yapily', name: 'api-client', version: '0.0.1-SNAPSHOT'
+    compile group: 'yapily', name: 'sdk', version: '0.1.2-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
