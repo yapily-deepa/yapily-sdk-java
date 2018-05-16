@@ -1,50 +1,42 @@
 package yapily.sdk.client.yapily;
 
 
-import yapily.api.client.model.ApplicationUser;
-import yapily.sdk.client.BaseHttpRpc;
-import yapily.sdk.client.RequestSerializer;
-import yapily.sdk.client.ResponseDeserializer;
-import yapily.sdk.client.SystemPropertiesCredentialsProvider;
-import yapily.sdk.services.ApiClient;
+import java.util.List;
+
+import org.apache.http.client.CredentialsProvider;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.util.List;
+import yapily.api.client.model.ApplicationUser;
+import yapily.sdk.client.BaseHttpRpc;
+import yapily.sdk.client.HeaderAppender;
+import yapily.sdk.client.RequestSerializer;
+import yapily.sdk.client.ResponseDeserializer;
+import yapily.sdk.services.ApiClient;
 
 public class HttpUsersRpc extends BaseHttpRpc {
 
     private final ApiClient apiClient;
+    private final CredentialsProvider credentialsProvider;
 
-    ResponseDeserializer<List<ApplicationUser>> responseDeserializerList = new ResponseDeserializer<>(new TypeReference<List<ApplicationUser>>() {
+    private ResponseDeserializer<List<ApplicationUser>> responseDeserializerList = new ResponseDeserializer<>(new TypeReference<List<ApplicationUser>>() {
     });
-    ResponseDeserializer<ApplicationUser> responseDeserializer = new ResponseDeserializer<>(ApplicationUser.class);
-    RequestSerializer requestSerializer = new RequestSerializer();
 
-    public HttpUsersRpc(ApiClient apiClient) {
+    private ResponseDeserializer<ApplicationUser> responseDeserializer = new ResponseDeserializer<>(ApplicationUser.class);
+
+    private RequestSerializer requestSerializer = new RequestSerializer();
+
+    public HttpUsersRpc(ApiClient apiClient, CredentialsProvider credentialsProvider) {
         this.apiClient = apiClient;
+        this.credentialsProvider = credentialsProvider;
     }
 
-    public List<ApplicationUser> listUsers() {
-        return requestGet(apiClient.getBaseUrl(), responseDeserializerList, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public ApplicationUser post(ApplicationUser appUser) {
+        return requestPost(apiClient.getEndpoint(), appUser, requestSerializer, responseDeserializer, credentialsProvider, new HeaderAppender());
     }
 
-    public ApplicationUser postUser(String appUserId) {
-        return requestPost(apiClient.getBaseUrl(), appUserId, requestSerializer, responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
+    public List<ApplicationUser> list() {
+        return requestGet(apiClient.getEndpoint(), responseDeserializerList, credentialsProvider, new HeaderAppender());
     }
 
-    public void putUser(String uuid, ApplicationUser applicationUser) {
-        requestPut(getApplicationUserUrl(uuid), applicationUser, requestSerializer, SystemPropertiesCredentialsProvider.credentialsProvider());
-    }
-
-    public void deleteUser(String uuid) {
-        requestDelete(getApplicationUserUrl(uuid), SystemPropertiesCredentialsProvider.credentialsProvider());
-    }
-
-    public ApplicationUser getUser(String uuid) {
-        return requestGet(getApplicationUserUrl(uuid), responseDeserializer, SystemPropertiesCredentialsProvider.credentialsProvider());
-    }
-
-    private String getApplicationUserUrl(String userUuid) {
-        return apiClient.getBaseUrl() + userUuid;
-    }
 }

@@ -1,17 +1,17 @@
 package yapily.examples;
 
-import yapily.sdk.YapilyApi;
-import yapily.api.client.model.ApplicationUser;
-import yapily.sdk.services.yapily.Users;
-
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import yapily.api.client.model.ApplicationUser;
+import yapily.sdk.YapilyApi;
+import yapily.sdk.services.yapily.UsersApi;
+
 /**
  * This example demonstrates how to create and retrieve users using your application credentials.
- * Application credentials must be created and managed in the Yapily Dashboard Application.
- * For demo purposes, the application ID and secret are included as constants.
+ * Application credentials must be created and managed in the Yapily Dashboard Application. For demo
+ * purposes, the application ID and secret are included as constants.
  */
 public class ExampleConfigureUsers {
 
@@ -29,15 +29,22 @@ public class ExampleConfigureUsers {
         System.out.println("Set application credentials as system properties");
 
         // Create users for this application
-        final Users usersApi = new Users();
-        usersApi.createUser(UUID.randomUUID().toString());
-        usersApi.createUser(UUID.randomUUID().toString());
-        final ApplicationUser applicationUserC = usersApi.createUser(UUID.randomUUID().toString());
+        final UsersApi usersApi = new UsersApi.Builder().standard().build();
+
+        usersApi.createUser(newApplicationUser());
+        usersApi.createUser(newApplicationUser());
+        final ApplicationUser applicationUserC = usersApi.createUser(newApplicationUser());
 
         System.out.println("Created users");
 
         List<ApplicationUser> users = usersApi.listUsers();
         System.out.println(users);
+
+        // Retrieve the first user from the api
+        String userUuid = users.get(0).getUuid();
+        ApplicationUser applicationUser = usersApi.getUser(userUuid);
+
+        System.out.println(applicationUser);
 
         // List users for this application
         final String recordsList = users.stream()
@@ -61,6 +68,12 @@ public class ExampleConfigureUsers {
         System.out.println("List updated user:");
         System.out.println(recordsListUpdated);
 
+    }
+
+    private static ApplicationUser newApplicationUser() {
+        ApplicationUser user = new ApplicationUser();
+        user.setUuid(UUID.randomUUID().toString());
+        return user;
     }
 
 }

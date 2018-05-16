@@ -1,5 +1,3 @@
-@Library('helper-library') _
-
 node {
     properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactNumToKeepStr: '5', numToKeepStr: '5']]])
 
@@ -24,17 +22,7 @@ node {
             helper.mavenBuild('examples')
         }
 
-        if(BRANCH_NAME == "master" || BRANCH_NAME =~ "release/") {
-
-            stage('Deploy sdk') {
-                helper.mavenDeploy('sdk')
-            }
-
-            stage('Deploy examples') {
-                helper.mavenDeploy('examples')
-            }
-
-        }
-
+        helper.mavenDeployPublic('sdk')
+        helper.mavenDeployPublic('examples')
     }
 }

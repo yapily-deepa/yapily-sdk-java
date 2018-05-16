@@ -1,21 +1,24 @@
-package yapily.sdk.client;
+package yapily.sdk.credential;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 
-import yapily.sdk.YapilyApi;
 import com.google.common.base.Strings;
 
-public class SystemPropertiesCredentialsProvider extends BasicCredentialsProvider {
+import yapily.sdk.YapilyApi;
 
-    private static SystemPropertiesCredentialsProvider INSTANCE;
+public class SystemPropertiesCredentialsProvider extends BasicCredentialsProvider implements YapilyCredentials {
+
+    private static final Object lock = new Object();
+    private static volatile SystemPropertiesCredentialsProvider INSTANCE;
 
     SystemPropertiesCredentialsProvider() {
         if (Strings.isNullOrEmpty(System.getProperty(YapilyApi.API_APPLICATION_ID_ENV_NAME)) || Strings.isNullOrEmpty(System.getProperty(YapilyApi.API_APPLICATION_SECRET_ENV_NAME))) {
             System.out.println("Credentials not set with system properties: " + YapilyApi.API_APPLICATION_ID_ENV_NAME + ", " + YapilyApi.API_APPLICATION_SECRET_ENV_NAME);
             System.out.println("checking for environment variables...");
-            if(Strings.isNullOrEmpty(System.getenv(YapilyApi.API_APPLICATION_ID_ENV_NAME)) || Strings.isNullOrEmpty(System.getenv(YapilyApi.API_APPLICATION_SECRET_ENV_NAME))) {
+            if (Strings.isNullOrEmpty(System.getenv(YapilyApi.API_APPLICATION_ID_ENV_NAME)) || Strings.isNullOrEmpty(System.getenv(YapilyApi.API_APPLICATION_SECRET_ENV_NAME))) {
                 throw new RuntimeException("Credentials not set with environment variables: " + YapilyApi.API_APPLICATION_ID_ENV_NAME + ", " + YapilyApi.API_APPLICATION_SECRET_ENV_NAME);
             }
         }
@@ -25,10 +28,18 @@ public class SystemPropertiesCredentialsProvider extends BasicCredentialsProvide
     }
 
     synchronized public static SystemPropertiesCredentialsProvider credentialsProvider() {
-        if(INSTANCE==null){
-            INSTANCE = new SystemPropertiesCredentialsProvider();
+        if (INSTANCE == null) {
+            synchronized (lock) {
+                if (INSTANCE == null) {
+                    INSTANCE = new SystemPropertiesCredentialsProvider();
+                }
+            }
         }
         return INSTANCE;
     }
 
+    @Override
+    public CredentialsProvider toCredentialsProvider() {
+        return this;
+    }
 }

@@ -1,10 +1,10 @@
-#Yapily Java SDK
+# Yapily Java SDK
 [![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1-SNAPSHOT&x2=0)](http://badge.fury.io/gh/boennemann%2Fbadges)
 
 This SDK can be used as a module or an example of how to connect
-to any bank integrated by Yapily.
+to any financial institution integrated by Yapily.
 
-##Requirements
+## Requirements
 
 To connect to the Yapily API, you will need to register your 
 application at [https://dashboard.yapily.com]().
@@ -12,13 +12,13 @@ application at [https://dashboard.yapily.com]().
 These application credentials can then be used to authorise all
 your API requests.
 
-##Installation
+## Installation
 
 The SDK is currently available in the Yapily maven repository and 
 can be included in your project 
 by adding it to your dependencies
 
-####Maven
+#### Maven
 
 Repository:
 
@@ -40,13 +40,13 @@ Dependency:
    <!-- other dependencies -->
    <dependency>
        <groupId>yapily</groupId>
-       <artifactId>sdk</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
+       <artifactId>yapily-sdk-java</artifactId>
+       <version>0.1.2-SNAPSHOT</version>
    </dependency>
 </dependencies>
 ```
 
-####Gradle
+#### Gradle
 
 Repository:
 
@@ -62,61 +62,66 @@ repositories {
 Dependency:
 
 ```groovy
-compile group: 'yapily', name: 'sdk', version: '0.0.1-SNAPSHOT'
+compile group: 'yapily', name: 'yapily-sdk-java', version: '0.1.2-SNAPSHOT'
 ```
 
-####Download JAR
+#### Download JAR
 
 The JAR can also be downloaded from a tagged release, 
 or this project can be cloned/downloaded and packaged into a 
 library JAR to be included in your project.
 
-##Usage
+## Usage
 
 Sample usage of the SDK can be seen in the `examples` folder.
 
-- Retrieve a list of available banks to connect to
+- Retrieve a list of available financial institutions to connect to
 
 ```java
-Banks banksApi = new Banks();
-List<Bank> banksList = banksApi.listBanks();
+InstitutionsApi institutionsApi = new InstitutionsApi.Builder().standard().build();
+List<Institution> institutionList = institutionsApi.listInstitutions();
 ```
 
 - Creating users and retrieving users for your application registered in the Yapily Dashboard
 ```java
-Users usersApi = new Users();
+UsersApi usersApi = new UsersApi.Builder().standard().build();
 usersApi.createUser("Bojack");
 List<ApplicationUser> users = usersApi.listUsers();
 ```
 
-- Receiving an authorisation URL your users to log into their bank
+- Receiving an authorisation URL your users to log into their institution
 
 ```java
 Auth auth = new Auth();
-URI directUrl = auth.authDirectURL(applicationId, userUuid, bankId, YOUR_CALLBACK_URL, "account");
+URI directUrl = auth.authDirectURL(applicationId, userUuid, institutionId, YOUR_CALLBACK_URL, "account");
+```
+
+- Receiving consents issued by your user authorizing
+```java
+List<Consent> allConsents = usersApi.listConsents(YOUR_USER_ID);
 ```
  
 - Returning user account details
 
 ```java
-Accounts accountsApi = new Accounts();
-List<Account> accounts = accountsApi.listAccounts(userUuid, bankId);
+AccountsApi accountsApi = new AccountsApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
+List<Account> accounts = accountsApi.listAccounts(userUuid, institutionId);
 ```
 
 - Returning user transaction details
 
 ```java
-Transactions transactionsApi = new Transactions();
-List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accountId, bankId);
+TransactionsApi transactionsApi = new TransactionsApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
+List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accountId, institutionId);
 ```
 
 - Returning user identity details
 ```java
-Identities identitiesApi = new Identities();
-Identity identity = identitiesApi.getIdentity(userUuid, bankId);
+IdentitiesApi identitiesApi = new IdentitiesApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
+Identity identity = identitiesApi.getIdentity(userUuid, institutionId);
 ```
 
-##Further information
+## Further information
 
 For more information on how to get connected, visit the
 [Yapily developer resources](https://github.com/yapily/developer-resources) repo.
