@@ -10,6 +10,14 @@ import yapily.sdk.YapilyAuth;
 
 public class AuthClient {
 
+    /**
+     * The default encoded root URL of the service. This is determined when the library is generated and
+     * normally should not be changed.
+     */
+    private static final String DEFAULT_ROOT_URL =
+            System.getenv().getOrDefault(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME,
+                                         System.getProperty(YapilyAuth.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8082/"));
+
     // Note: Leave this static initializer at the top of the file.
     static {
         Properties props = new Properties();
@@ -34,14 +42,6 @@ public class AuthClient {
             e.printStackTrace();
         }
     }
-
-    /**
-     * The default encoded root URL of the service. This is determined when the library is generated and
-     * normally should not be changed.
-     */
-    private static final String DEFAULT_ROOT_URL =
-            System.getenv().getOrDefault(YapilyAuth.DEFAULT_ROOT_URL_ENV_NAME,
-                                         System.getProperty(YapilyAuth.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8082/"));
 
     private final String rootUrl;
 

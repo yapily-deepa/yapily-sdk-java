@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import yapily.api.client.model.ApplicationUser;
 import yapily.sdk.YapilyApi;
-import yapily.sdk.services.yapily.Users;
+import yapily.sdk.services.yapily.UsersApi;
 
 /**
  * This example demonstrates how to create and retrieve users using your application credentials.
@@ -29,7 +29,7 @@ public class ExampleConfigureUsers {
         System.out.println("Set application credentials as system properties");
 
         // Create users for this application
-        final Users usersApi = new Users();
+        final UsersApi usersApi = new UsersApi.Builder().standard().build();
 
         usersApi.createUser(newApplicationUser());
         usersApi.createUser(newApplicationUser());
@@ -39,6 +39,12 @@ public class ExampleConfigureUsers {
 
         List<ApplicationUser> users = usersApi.listUsers();
         System.out.println(users);
+
+        // Retrieve the first user from the api
+        String userUuid = users.get(0).getUuid();
+        ApplicationUser applicationUser = usersApi.getUser(userUuid);
+
+        System.out.println(applicationUser);
 
         // List users for this application
         final String recordsList = users.stream()

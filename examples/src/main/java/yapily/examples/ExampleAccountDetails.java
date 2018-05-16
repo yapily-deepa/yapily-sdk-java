@@ -9,18 +9,19 @@ import java.util.UUID;
 
 import yapily.api.client.model.Account;
 import yapily.api.client.model.ApplicationUser;
+import yapily.api.client.model.Consent;
 import yapily.api.client.model.Identity;
 import yapily.api.client.model.Transaction;
 import yapily.sdk.YapilyApi;
-import yapily.sdk.services.institutions.Accounts;
+import yapily.sdk.services.institutions.AccountsApi;
 import yapily.sdk.services.institutions.Auth;
-import yapily.sdk.services.institutions.Identities;
-import yapily.sdk.services.institutions.Transactions;
-import yapily.sdk.services.yapily.Users;
+import yapily.sdk.services.institutions.IdentitiesApi;
+import yapily.sdk.services.institutions.TransactionsApi;
+import yapily.sdk.services.yapily.UsersApi;
 
 /**
  * This example simulates creating and authenticating an institution user, returning normalised data
- * from Accounts, Transactions and Identity endpoints. Application credentials must be created and
+ * from AccountsApi, TransactionsApi and Identity endpoints. Application credentials must be created and
  * managed in the Yapily Dashboard Application. For demo purposes, the application ID and secret are
  * included as constants.
  */
@@ -37,7 +38,7 @@ public class ExampleAccountDetails {
         System.setProperty(YapilyApi.API_APPLICATION_SECRET_ENV_NAME, applicationSecret);
 
         // Create a user for this application
-        final Users usersApi = new Users();
+        final UsersApi usersApi = new UsersApi.Builder().standard().build();
         ApplicationUser appUser = new ApplicationUser();
         appUser.setUuid(UUID.randomUUID().toString());
         final ApplicationUser applicationUser = usersApi.createUser(appUser);
@@ -51,39 +52,51 @@ public class ExampleAccountDetails {
         final Auth auth = new Auth();
         final URI directUrl = auth.authDirectURL(applicationId, userUuid, institutionId, Constants.CALLBACK_URL, "account");
         if (Desktop.isDesktopSupported()) {
-            try {
+            try (final Scanner reader = new Scanner(System.in)) {
                 Desktop.getDesktop().browse(directUrl);
 
                 // --- AFTER AUTHENTICATING, YOU SHOULD BE REDIRECTED
-
-                final Scanner reader = new Scanner(System.in);
                 System.out.println("After completing the authentication, press Enter to continue: [enter]");
                 reader.nextLine();
 
-                // Print out user details
+                List<Consent> allConsents = usersApi.listConsents(userUuid);
 
-                final Accounts accountsApi = new Accounts();
-                List<Account> accounts = accountsApi.listAccounts(userUuid, institutionId);
+                System.out.println("**************ACCOUNTS******************");
+                System.out.println(allConsents);
+                System.out.println("****************************************");
 
+                Consent consent = usersApi.listConsentsForInstitution(userUuid, institutionId).get(0);
+
+                final AccountsApi accountsApi = new AccountsApi.Builder().standard()
+                                                                         .withConsentToken(consent.getConsentToken())
+                                                                         .build();
+
+                List<Account> accounts = accountsApi.listAccounts();
+
+                // Print accounts
                 System.out.println("**************ACCOUNTS******************");
                 System.out.println(accounts);
                 System.out.println("****************************************");
 
-                final Transactions transactionsApi = new Transactions();
-                List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accounts.get(0).getId(), institutionId);
+                final TransactionsApi transactionsApi = new TransactionsApi.Builder().withApplicationCredentials(applicationId, applicationSecret)
+                                                                                     .withConsentToken(consent.getConsentToken())
+                                                                                     .build();
+
+                List<Transaction> transactions = transactionsApi.listTransactions(accounts.get(0).getId());
 
                 System.out.println("**************TRANSACTIONS**************");
                 System.out.println(transactions);
                 System.out.println("****************************************");
 
-                final Identities identitiesApi = new Identities();
-                Identity identity = identitiesApi.getIdentity(userUuid, institutionId);
+                final IdentitiesApi identitiesApi = new IdentitiesApi.Builder().withApplicationCredentials(applicationId, applicationSecret)
+                                                                               .withConsentToken(consent.getConsentToken())
+                                                                               .build();
+
+                Identity identity = identitiesApi.getIdentity();
 
                 System.out.println("**************IDENTITY******************");
                 System.out.println(identity);
                 System.out.println("****************************************");
-
-                reader.close();
 
             } catch (final IOException e) {
                 e.printStackTrace();

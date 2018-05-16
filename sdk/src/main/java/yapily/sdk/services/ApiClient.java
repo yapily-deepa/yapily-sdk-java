@@ -5,13 +5,22 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import org.apache.commons.text.StrSubstitutor;
+
 import com.google.common.base.Preconditions;
 
 import yapily.sdk.YapilyApi;
+import yapily.sdk.client.ValueMap;
 
 public class ApiClient {
 
     static final Logger LOGGER = Logger.getLogger(ApiClient.class.getName());
+    /**
+     * The default encoded root URL of the service. This is determined when the library is generated and
+     * normally should not be changed.
+     */
+    static final String DEFAULT_ROOT_URL = System.getenv().getOrDefault(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME,
+                                                                        System.getProperty(YapilyApi.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8081"));
 
     // Note: Leave this static initializer at the top of the file.
     static {
@@ -30,20 +39,13 @@ public class ApiClient {
             Preconditions.checkState(apiMajorVersion == 0 &&
                                      apiMinorVersion >= 1,
                                      "You are currently running version %s of the Yapily API client. " +
-                                                           "You need at least version 0.0.1 of the client to run version " +
-                                                           "%s of the Yapily SDK library.",
+                                     "You need at least version 0.0.1 of the client to run version " +
+                                     "%s of the Yapily SDK library.",
                                      apiVersion, sdkVersion);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-    /**
-     * The default encoded root URL of the service. This is determined when the library is generated and
-     * normally should not be changed.
-     */
-    static final String DEFAULT_ROOT_URL = System.getenv().getOrDefault(YapilyApi.DEFAULT_ROOT_URL_ENV_NAME,
-                                                                        System.getProperty(YapilyApi.DEFAULT_ROOT_URL_PROPERTY_NAME, "http://localhost:8081"));
 
     /**
      * Root URL of the service, for example {@code "https://api.yapily.com/"}. Must be URL-encoded and
@@ -65,8 +67,12 @@ public class ApiClient {
         this(DEFAULT_ROOT_URL, servicePath);
     }
 
-    public final String getBaseUrl() {
+    public final String getEndpoint() {
         return rootUrl + servicePath;
+    }
+
+    public final String getEndpoint(ValueMap valueMap) {
+        return new StrSubstitutor(valueMap.toMap(), "{", "}").replace(getEndpoint());
     }
 
 }

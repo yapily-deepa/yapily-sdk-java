@@ -19,10 +19,6 @@ public class Auth extends AuthClient {
         super(YapilyAuth.PATH_DIRECT);
     }
 
-    public Auth(String rootUrl) {
-        super(rootUrl, YapilyAuth.PATH_DIRECT);
-    }
-
     public URI authDirectURL(String applicationUuid, String userUuid, String institutionId, String callbackUrl, String scope) {
         try {
             final URIBuilder uriBuilder = new URIBuilder(getBaseDirectUrl());

@@ -78,13 +78,13 @@ Sample usage of the SDK can be seen in the `examples` folder.
 - Retrieve a list of available financial institutions to connect to
 
 ```java
-Institutions institutionsApi = new Institutions();
+InstitutionsApi institutionsApi = new InstitutionsApi.Builder().standard().build();
 List<Institution> institutionList = institutionsApi.listInstitutions();
 ```
 
 - Creating users and retrieving users for your application registered in the Yapily Dashboard
 ```java
-Users usersApi = new Users();
+UsersApi usersApi = new UsersApi.Builder().standard().build();
 usersApi.createUser("Bojack");
 List<ApplicationUser> users = usersApi.listUsers();
 ```
@@ -95,24 +95,29 @@ List<ApplicationUser> users = usersApi.listUsers();
 Auth auth = new Auth();
 URI directUrl = auth.authDirectURL(applicationId, userUuid, institutionId, YOUR_CALLBACK_URL, "account");
 ```
+
+- Receiving consents issued by your user authorizing
+```java
+List<Consent> allConsents = usersApi.listConsents(YOUR_USER_ID);
+```
  
 - Returning user account details
 
 ```java
-Accounts accountsApi = new Accounts();
+AccountsApi accountsApi = new AccountsApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
 List<Account> accounts = accountsApi.listAccounts(userUuid, institutionId);
 ```
 
 - Returning user transaction details
 
 ```java
-Transactions transactionsApi = new Transactions();
+TransactionsApi transactionsApi = new TransactionsApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
 List<Transaction> transactions = transactionsApi.listTransactions(userUuid, accountId, institutionId);
 ```
 
 - Returning user identity details
 ```java
-Identities identitiesApi = new Identities();
+IdentitiesApi identitiesApi = new IdentitiesApi.Builder().standard().withConsentToken(YOUR_CONSENT_TOKEN).build();
 Identity identity = identitiesApi.getIdentity(userUuid, institutionId);
 ```
 

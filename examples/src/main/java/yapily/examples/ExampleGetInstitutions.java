@@ -1,10 +1,11 @@
 package yapily.examples;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import yapily.api.client.model.Institution;
 import yapily.sdk.YapilyApi;
-import yapily.sdk.services.yapily.Institutions;
+import yapily.sdk.services.yapily.InstitutionsApi;
 
 /**
  * Hello Yapily! This example lists all institutions' names retrieved from the Yapily API server
@@ -22,17 +23,24 @@ public class ExampleGetInstitutions {
 
         System.out.println("Set application credentials as system properties");
 
-        // Create Institutions API client
-        final Institutions institutionsApi = new Institutions();
+        // Create InstitutionsApi API client
+        final InstitutionsApi institutionsApi = new InstitutionsApi.Builder().standard().build();
 
         // List all institutions
-        final String institutionsList = institutionsApi.listInstitutions()
-                                                       .stream()
-                                                       .map(Institution::getName)
-                                                       .collect(Collectors.joining(", "));
+        List<Institution> institutions = institutionsApi.listInstitutions();
 
-        System.out.println("Available Institutions: " + institutionsList);
+        final String institutionsList = institutions.stream()
+                                                    .map(Institution::getName)
+                                                    .collect(Collectors.joining(", "));
 
+        System.out.println("Available InstitutionsApi: " + institutionsList);
+
+        // Retrieve one institution
+        String institutionId = institutions.get(0).getId();
+
+        Institution institution = institutionsApi.getInstitution(institutionId);
+
+        System.out.println("Retrieved institution " + institution.getId());
     }
 
 }

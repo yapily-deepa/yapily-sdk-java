@@ -25,7 +25,7 @@ public class CommonClientUtil {
             Preconditions.checkArgument("/".equals(servicePath), "service path must equal \"/\" if it is of length 1.");
             servicePath = "";
         } else if (servicePath.length() > 0) {
-            if (!servicePath.endsWith("/")) {
+            if (!servicePath.endsWith("/") && !servicePath.contains("?")) {
                 servicePath += "/";
             }
             if (servicePath.startsWith("/")) {

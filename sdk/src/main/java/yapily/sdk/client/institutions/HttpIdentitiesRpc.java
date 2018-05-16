@@ -1,38 +1,29 @@
 package yapily.sdk.client.institutions;
 
-import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.client.CredentialsProvider;
 
 import yapily.api.client.model.Identity;
 import yapily.sdk.client.BaseHttpRpc;
+import yapily.sdk.client.HeaderAppender;
 import yapily.sdk.client.ResponseDeserializer;
-import yapily.sdk.client.SystemPropertiesCredentialsProvider;
 import yapily.sdk.services.ApiClient;
 
 public class HttpIdentitiesRpc extends BaseHttpRpc {
 
     private final ApiClient apiClient;
-    private final BasicCredentialsProvider basicCredentialsProvider;
+    private final HeaderAppender headerAppender;
+    private final CredentialsProvider credentialsProvider;
 
-    ResponseDeserializer<Identity> responseDeserializer = new ResponseDeserializer<>(Identity.class);
+    private ResponseDeserializer<Identity> responseDeserializer = new ResponseDeserializer<>(Identity.class);
 
-    public HttpIdentitiesRpc(ApiClient apiClient) {
+    public HttpIdentitiesRpc(ApiClient apiClient, CredentialsProvider credentialsProvider, HeaderAppender headerAppender) {
         this.apiClient = apiClient;
-        this.basicCredentialsProvider = SystemPropertiesCredentialsProvider.credentialsProvider();
+        this.headerAppender = headerAppender;
+        this.credentialsProvider = credentialsProvider;
     }
 
-    public HttpIdentitiesRpc(ApiClient apiClient, BasicCredentialsProvider basicCredentialsProvider) {
-        this.apiClient = apiClient;
-        this.basicCredentialsProvider = basicCredentialsProvider;
-    }
-
-    public Identity getIdentity(String userUUID, String institutionId) {
-        return requestGet(getIdentityUrl(userUUID, institutionId), responseDeserializer, basicCredentialsProvider);
-    }
-
-    private String getIdentityUrl(String userUUID, String institutionId) {
-        return apiClient.getBaseUrl()
-                        .replace("{userUuid}", userUUID)
-                        .replace("{institutionId}", institutionId);
+    public Identity getIdentity() {
+        return requestGet(apiClient.getEndpoint(), responseDeserializer, credentialsProvider, headerAppender);
     }
 
 }
