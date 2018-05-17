@@ -25,10 +25,10 @@ node {
             sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
             sh "mvn versions:commit"
           }
+          helper.mavenBuild()
+          helper.mavenInstall()
+          helper.mavenDeployPublic()
         }
-        helper.mavenBuild('sdk')
-        helper.mavenInstall('sdk')
-        helper.mavenDeployPublic('sdk')
       }
 
       stage('Build and Publish Examples') {
@@ -38,10 +38,10 @@ node {
             sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
             sh "mvn versions:commit"
           }
+          helper.mavenBuild()
+          helper.mavenInstall()
+          helper.mavenDeployPublic()
         }
-        helper.mavenBuild('examples')
-        helper.mavenInstall('examples')
-        helper.mavenDeployPublic('examples')
       }
 
       Map replaceMap = [ "%SDK_VERSION%":params.API_VERSION ]
