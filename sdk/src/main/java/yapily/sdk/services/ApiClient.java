@@ -37,7 +37,7 @@ public class ApiClient {
             final String sdkVersion = props.getProperty("yapily.sdk.version");
 
             Preconditions.checkState(apiMajorVersion == 0 &&
-                                     apiMinorVersion >= 1,
+                                     apiMinorVersion >= 0,
                                      "You are currently running version %s of the Yapily API client. " +
                                      "You need at least version 0.0.1 of the client to run version " +
                                      "%s of the Yapily SDK library.",
