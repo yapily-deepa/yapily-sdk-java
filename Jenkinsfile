@@ -17,9 +17,20 @@ node {
 		echo "Generate version: ${params.API_VERSION}"
 
     def updateClientModels = {
-      sh "mvn versions:set-property -Dproperty=yapily-api-version -DnewVersion=${params.API_VERSION}"
-      sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
-      sh "mvn versions:commit"
+      dir('sdk') {
+        withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
+          sh "mvn versions:set-property -Dproperty=yapily-api-version -DnewVersion=${params.API_VERSION}"
+          sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
+          sh "mvn versions:commit"
+        }
+      }
+      dir('examples') {
+        withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
+          sh "mvn versions:set-property -Dproperty=yapily-sdk-java-version -DnewVersion=${params.API_VERSION}"
+          sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
+          sh "mvn versions:commit"
+        }
+      }
       Map replaceMap = [ "%SDK_VERSION%":params.API_VERSION ]
       def path = pwd()
       String readmeFile = "${path}/README.md"
