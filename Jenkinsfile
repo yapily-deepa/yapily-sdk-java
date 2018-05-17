@@ -17,20 +17,33 @@ node {
 		echo "Generate version: ${params.API_VERSION}"
 
     def updateClientModels = {
-      dir('sdk') {
-        withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
-          sh "mvn versions:set-property -Dproperty=yapily-api-version -DnewVersion=${params.API_VERSION}"
-          sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
-          sh "mvn versions:commit"
+
+      stage('Build and Publish SDK') {
+        dir('sdk') {
+          withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
+            sh "mvn versions:set-property -Dproperty=yapily-api-version -DnewVersion=${params.API_VERSION}"
+            sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
+            sh "mvn versions:commit"
+          }
         }
+        helper.mavenBuild('sdk')
+        helper.mavenInstall('sdk')
+        helper.mavenDeployPublic('sdk')
       }
-      dir('examples') {
-        withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
-          sh "mvn versions:set-property -Dproperty=yapily-sdk-java-version -DnewVersion=${params.API_VERSION}"
-          sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
-          sh "mvn versions:commit"
+
+      stage('Build and Publish Examples') {
+        dir('examples') {
+          withMaven(jdk: 'Java8', includeSnapshotVersions:true) {
+            sh "mvn versions:set-property -Dproperty=yapily-sdk-java-version -DnewVersion=${params.API_VERSION}"
+            sh "mvn versions:set -DnewVersion=${params.API_VERSION}"
+            sh "mvn versions:commit"
+          }
         }
+        helper.mavenBuild('examples')
+        helper.mavenInstall('examples')
+        helper.mavenDeployPublic('examples')
       }
+
       Map replaceMap = [ "%SDK_VERSION%":params.API_VERSION ]
       def path = pwd()
       String readmeFile = "${path}/README.md"
@@ -43,21 +56,6 @@ node {
                        "Bump to ${params.API_VERSION}",
                        params.API_VERSION,
                        updateClientModels)
-    }
-
-    stage('Build') {
-      helper.mavenBuild('sdk')
-      helper.mavenBuild('examples')
-    }
-
-    stage('Install') {
-      helper.mavenInstall('sdk')
-      helper.mavenInstall('examples')
-    }
-
-    stage('Publish to Maven') {
-      helper.mavenDeployPublic('sdk')
-      helper.mavenDeployPublic('examples')
     }
 
     slackSend color: "good", message: "Build successfully - ${params.API_VERSION}"
