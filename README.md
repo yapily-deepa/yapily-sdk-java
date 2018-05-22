@@ -1,5 +1,5 @@
 # Yapily Java SDK
-[![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.1-SNAPSHOT&x2=0)](http://badge.fury.io/gh/boennemann%2Fbadges)
+[![GitHub version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=gh&type=6&v=0.0.4-SNAPSHOT&x2=0)](http://badge.fury.io/gh/boennemann%2Fbadges)
 
 This SDK can be used as a module or an example of how to connect
 to any financial institution integrated by Yapily.
@@ -41,7 +41,7 @@ Dependency:
    <dependency>
        <groupId>yapily</groupId>
        <artifactId>yapily-sdk-java</artifactId>
-       <version>0.1.2-SNAPSHOT</version>
+       <version>0.0.4-SNAPSHOT</version>
    </dependency>
 </dependencies>
 ```
