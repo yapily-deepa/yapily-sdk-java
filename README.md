@@ -41,7 +41,7 @@ Dependency:
    <dependency>
        <groupId>yapily</groupId>
        <artifactId>yapily-sdk-java</artifactId>
-       <version>0.1.2-SNAPSHOT</version>
+       <version>0.0.4-SNAPSHOT</version>
    </dependency>
 </dependencies>
 ```
@@ -62,7 +62,7 @@ repositories {
 Dependency:
 
 ```groovy
-compile group: 'yapily', name: 'yapily-sdk-java', version: '0.1.2-SNAPSHOT'
+compile group: 'yapily', name: 'yapily-sdk-java', version: '0.0.4-SNAPSHOT'
 ```
 
 #### Download JAR
